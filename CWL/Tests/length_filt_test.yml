@@ -1,7 +1,7 @@
 # cwltest --basedir cwl_test_dir --test ../Tools/LengthFiltering/length_filtering.cwl --tool cwltool
 
-- job: ../Tools/LengthFiltering/length_filtering.yml
-  tool: ../Tools/LengthFiltering/length_filtering.cwl
+- job: CWL/Tools/LengthFiltering/length_filtering.yml
+  tool: CWL/Tools/LengthFiltering/length_filtering.cwl
   output:
       filtered_contigs_fasta:
         basename: ERR575691_host_filtered_filt500bp.fasta

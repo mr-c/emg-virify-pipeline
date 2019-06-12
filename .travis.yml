@@ -11,13 +11,18 @@ install:
   - sudo apt-get install aria2
   - mkdir -p $TRAVIS_BUILD_DIR/virsorter-data-cache
   # - time wget -nc -q -P $TRAVIS_BUILD_DIR/virsorter-data-cache/ ftp://ftp.ebi.ac.uk/pub/databases/metagenomics/VirSorter_data_viral/virsorter-data-v2.tar.gz
-    #https://zenodo.org/record/1168727/files/virsorter-data-v2.tar.gz
+  # https://zenodo.org/record/1168727/files/virsorter-data-v2.tar.gz
+#    (wget -qO- ftp://ftp.ebi.ac.uk/pub/databases/metagenomics/VirSorter_data_viral/virsorter-data-v2.tar.gz |
+#    tar --extract --verbose --gzip --file=/dev/stdin --directory=$TRAVIS_BUILD_DIR/CWL/Tools/VirSorter/)
+
+"""
   - >
-    (aria2c -x  8 -s 8 --dir=$TRAVIS_BUILD_DIR/virsorter-data-cache/ ftp://ftp.ebi.ac.uk/pub/databases/metagenomics/VirSorter_data_viral/virsorter-data-v2.tar.gz &&
-      tar -xvzf $TRAVIS_BUILD_DIR/virsorter-data-cache/virsorter-data-v2.tar.gz) &
+    (aria2c -x 16 -s 16 --dir=$TRAVIS_BUILD_DIR/virsorter-data-cache/ ftp://ftp.ebi.ac.uk/pub/databases/metagenomics/VirSorter_data_viral/virsorter-data-v2.tar.gz &&
+    tar -xvzf $TRAVIS_BUILD_DIR/virsorter-data-cache/virsorter-data-v2.tar.gz) &
     docker pull simroux/virsorter:v1.0.5 &
     docker pull mgnify/hmmscan:latest &
-    docker build -t virfinder_viral:latest $TRAVIS_BUILD_DIR/CWL/Tools/VirFinder/ &
+    docker pull mgnify/virfinder_viral:latest &
+    #docker build -t virfinder_viral:latest $TRAVIS_BUILD_DIR/CWL/Tools/VirFinder/ &
     docker build -q -t annotation_viral_contigs:latest $TRAVIS_BUILD_DIR/CWL/Tools/Annotation/ &
     docker build -q -t assign_taxonomy:latest $TRAVIS_BUILD_DIR/CWL/Tools/Assign/ &
     docker build -q -t cwl_length_filter_docker:latest $TRAVIS_BUILD_DIR/CWL/Tools/LengthFiltering/ &
@@ -28,11 +33,13 @@ install:
     docker build -q -t sed_docker:latest $TRAVIS_BUILD_DIR/CWL/Tools/Sed/
     ; wait
   - mv $TRAVIS_BUILD_DIR/virsorter-data $TRAVIS_BUILD_DIR/CWL/Tools/VirSorter/
-
+"""
+  - docker build -q -t cwl_length_filter_docker:latest $TRAVIS_BUILD_DIR/CWL/Tools/LengthFiltering/
 script:
   - echo -e '#!/bin/bash\ncwltool --parallel "$@"' > pcwltool
   - chmod a+x pcwltool
-  - export PATH=$PATH:$PWD && travis_wait 60 cwltest --test $TRAVIS_BUILD_DIR/CWL/Tests/pipeline_test.yml --timeout 7200 --tool pcwltool
+  - export PATH=$PATH:$PWD && travis_wait 60 cwltest --test $TRAVIS_BUILD_DIR/CWL/Tests/length_filt_test.yml --timeout 7200 --tool pcwltool
+    #export PATH=$PATH:$PWD && travis_wait 60 cwltest --test $TRAVIS_BUILD_DIR/CWL/Tests/pipeline_test.yml --timeout 7200 --tool pcwltool
 
 
 # Caching from https://github.com/travis-ci/travis-ci/issues/5358#issuecomment-248915326
