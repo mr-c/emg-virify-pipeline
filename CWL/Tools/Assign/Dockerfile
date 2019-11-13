@@ -2,6 +2,7 @@ FROM python:3
 
 LABEL maintainer="Ekaterina Sakharova <kates@ebi.ac.uk>"
 
+RUN pip install --upgrade pip
 RUN pip install -q pandas biopython ete3
 RUN python -c 'from ete3 import NCBITaxa; NCBITaxa()'
 ##############################################################

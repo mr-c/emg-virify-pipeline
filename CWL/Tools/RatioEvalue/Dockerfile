@@ -3,6 +3,7 @@ FROM python:3
 LABEL maintainer="Ekaterina Sakharova <kates@ebi.ac.uk>"
 
 ADD Additional_data_vpHMMs.xlsx /
+RUN pip install --upgrade pip
 RUN pip install -q pandas xlrd
 ##############################################################
 # Dockerfile Version:   18.06.0-ce
