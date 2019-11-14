@@ -3,57 +3,87 @@
 CURRENT=`pwd`
 DIR='/Users/mhoelzer/git/CWL_viral_pipeline/CWL/Tools/'
 
+ln -s /Users/mhoelzer/git/What_the_Phage/nextflow-autodownload-databases/virsorter/virsorter-data ${DIR}/VirSorter/
+
 TOOL='LengthFiltering/'
 cd ${DIR}/${TOOL}
-docker build -t cwl_length_filter_docker:latest .
+NAME='cwl_length_filter_docker'
+docker build -t ${NAME}:latest .
+docker tag ${NAME}:latest mhoelzer/${NAME}:0.1
+docker push mhoelzer/${NAME}:0.1
 cd ${CURRENT}
 
 TOOL='Annotation/'
 cd ${DIR}/${TOOL}
-docker build -t annotation_viral_contigs:latest .
+NAME='annotation_viral_contigs'
+docker build -t ${NAME}:latest .
+docker tag ${NAME}:latest mhoelzer/${NAME}:0.1
+docker push mhoelzer/${NAME}:0.1
 cd ${CURRENT}
 
 TOOL='Assign/'
 cd ${DIR}/${TOOL}
-docker build -t assign_taxonomy:latest .
+NAME='assign_taxonomy'
+docker build -t ${NAME}:latest .
+docker tag ${NAME}:latest mhoelzer/${NAME}:0.1
+docker push mhoelzer/${NAME}:0.1
 cd ${CURRENT}
 
 TOOL='HMMScan/'
 cd ${DIR}/${TOOL}
-docker build -t hmmscan:latest .
+NAME='hmmscan'
+docker build -t ${NAME}:latest .
+docker tag ${NAME}:latest mhoelzer/${NAME}:0.1
+docker push mhoelzer/${NAME}:0.1
 cd ${CURRENT}
 
 TOOL='Mapping/'
 cd ${DIR}/${TOOL}
-docker build -t mapping_viral_predictions:latest .
+NAME='mapping_viral_predictions'
+docker build -t ${NAME}:latest .
+docker tag ${NAME}:latest mhoelzer/${NAME}:0.1
+docker push mhoelzer/${NAME}:0.1
 cd ${CURRENT}
 
 TOOL='Sed/'
 cd ${DIR}/${TOOL}
-docker build -t sed_docker:latest .
+NAME='sed_docker'
+docker build -t ${NAME}:latest .
+docker tag ${NAME}:latest mhoelzer/${NAME}:0.1
+docker push mhoelzer/${NAME}:0.1
 cd ${CURRENT}
 
 TOOL='ParsingPredictions/'
 cd ${DIR}/${TOOL}
-docker build -t cwl_parse_pred:latest .
+NAME='cwl_parse_pred'
+docker build -t ${NAME}:latest .
+docker tag ${NAME}:latest mhoelzer/${NAME}:0.1
+docker push mhoelzer/${NAME}:0.1
 cd ${CURRENT}
 
 TOOL='Prodigal/'
 cd ${DIR}/${TOOL}
-#I used nanozoo/prodial as a template 
-docker build -t prodigal_viral:latest .
+#I used nanozoo/prodigal as a template
+NAME='prodigal_viral' 
+docker build -t ${NAME}:latest .
+docker tag ${NAME}:latest mhoelzer/${NAME}:0.1
+docker push mhoelzer/${NAME}:0.1
 cd ${CURRENT}
 
 TOOL='RatioEvalue/'
 cd ${DIR}/${TOOL}
-docker build -t ratio_evalue:latest .
+NAME='ratio_evalue'
+docker build -t ${NAME}:latest .
+docker tag ${NAME}:latest mhoelzer/${NAME}:0.1
+docker push mhoelzer/${NAME}:0.1
 cd ${CURRENT}
 
 #NOT DONE
 TOOL='VirFinder/'
 cd ${DIR}/${TOOL}
 #I used multifractal/virfinder as a template
-docker build -t virfinder_viral:latest .
-#docker pull multifractal/virfinder:0.1
-#docker tag multifractal/virfinder:0.1 virfinder_viral:latest
+NAME='virfinder_viral'
+docker build -t ${NAME}:latest .
+docker tag ${NAME}:latest mhoelzer/${NAME}:0.1
+docker push mhoelzer/${NAME}:0.1
 cd ${CURRENT}
