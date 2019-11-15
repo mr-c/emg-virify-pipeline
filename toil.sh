@@ -6,19 +6,20 @@
 #export PATH=/hps/nobackup2/production/metagenomics/pipeline/tools-v5/miniconda2-4.6.14/bin:$PATH
 #export PERL5LIB=/hps/nobackup2/production/metagenomics/pipeline/tools-v5/genome-properties/code/modules:$PERL5LIB
 #export CONDA_ENV=/hps/nobackup2/production/metagenomics/pipeline/tools-v5/miniconda2-4.6.14/bin/activate
+
 # activate TOIL env
 source /hps/nobackup2/production/metagenomics/pipeline/tools-v5/toil-user-env/bin/activate
 
 ## SINGULARITY GENERAL
-DIR=/hps/nobackup2/singularity/mhoelzer/build
-export SINGULARITY_CACHEDIR=$DIR/.singularity
-export SINGULARITY_TMPDIR=$DIR/.singularity/tmp
-export SINGULARITY_LOCALCACHEDIR=$DIR/singularity/tmp
-export SINGULARITY_PULLFOLDER=$DIR/.singularity/pull
-export SINGULARITY_BINDPATH=$DIR/.singularity/scratch
+#DIR=/hps/nobackup2/singularity/mhoelzer/build
+#export SINGULARITY_CACHEDIR=$DIR/.singularity
+#export SINGULARITY_TMPDIR=$DIR/.singularity/tmp
+#export SINGULARITY_LOCALCACHEDIR=$DIR/singularity/tmp
+#export SINGULARITY_PULLFOLDER=$DIR/.singularity/pull
+#export SINGULARITY_BINDPATH=$DIR/.singularity/scratch
 
 ## CWL SINGULARITY
-export CWL_SINGULARITY_CACHE=/hps/nobackup2/singularity/mhoelzer/
+#export CWL_SINGULARITY_CACHE=/hps/nobackup2/singularity/mhoelzer/
 
 ### TOIL stuff
 export WORK_DIR=/homes/mhoelzer/data/toil/work

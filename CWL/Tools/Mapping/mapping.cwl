@@ -6,6 +6,7 @@ label: "Viral contig mapping"
 
 hints:
   DockerRequirement:
+    dockerImageId: /hps/nobackup2/singularity/mhoelzer/mhoelzer-mapping-viral-predictions-0.1.img
     dockerPull: mhoelzer/mapping_viral_predictions:0.1
 
 requirements:

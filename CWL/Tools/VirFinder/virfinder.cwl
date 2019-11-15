@@ -8,6 +8,7 @@ label: "VirFinder is a method for finding viral contigs from de novo assemblies.
 
 hints:
   DockerRequirement:
+    dockerImageId: /hps/nobackup2/singularity/mhoelzer/mhoelzer-virfinder-viral-0.1.img
     dockerPull: mhoelzer/virfinder_viral:0.1
 
 requirements:
