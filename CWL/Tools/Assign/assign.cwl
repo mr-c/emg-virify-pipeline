@@ -6,7 +6,7 @@ label: "Viral contig assign"
 
 hints:
   DockerRequirement:
-    dockerImageId: /hps/nobackup2/singularity/mhoelzer/mhoelzer-assign-taxonomy-0.1.img
+    #dockerImageId: /hps/nobackup2/singularity/mhoelzer/mhoelzer-assign-taxonomy-0.1.img
     dockerPull: mhoelzer/assign_taxonomy:0.1
 
 requirements:

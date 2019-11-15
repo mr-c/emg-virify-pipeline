@@ -6,7 +6,7 @@ label: "Ratio Evalue table"
 
 hints:
   DockerRequirement:
-    dockerImageId: /hps/nobackup2/singularity/mhoelzer/mhoelzer-ratio-evalue-0.1.img
+    #dockerImageId: /hps/nobackup2/singularity/mhoelzer/mhoelzer-ratio-evalue-0.1.img
     dockerPull: mhoelzer/ratio_evalue:0.1
 
 requirements:

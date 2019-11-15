@@ -7,7 +7,7 @@ label: "Biosequence analysis using profile hidden Markov models"
 
 hints:
   DockerRequirement:
-    dockerImageId: /hps/nobackup2/singularity/mhoelzer/mhoelzer-hmmscan-0.1.img
+    #dockerImageId: /hps/nobackup2/singularity/mhoelzer/mhoelzer-hmmscan-0.1.img
     dockerPull: mhoelzer/hmmscan:0.1
 
 requirements:
