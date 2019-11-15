@@ -5,9 +5,11 @@ class: CommandLineTool
 
 label: "Biosequence analysis using profile hidden Markov models"
 
-requirements:
+hints:
   DockerRequirement:
-    dockerPull: hmmscan:latest
+    dockerPull: mhoelzer/hmmscan:0.1
+
+requirements:
   InlineJavascriptRequirement: {}
 
 baseCommand: ["hmmscan"]

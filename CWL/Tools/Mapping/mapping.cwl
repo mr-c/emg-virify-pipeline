@@ -4,9 +4,11 @@ class: CommandLineTool
 
 label: "Viral contig mapping"
 
-requirements:
+hints:
   DockerRequirement:
-    dockerPull: mapping_viral_predictions:latest
+    dockerPull: mhoelzer/mapping_viral_predictions:0.1
+
+requirements:
   InlineJavascriptRequirement: {}
 
 baseCommand: ['Rscript', '/Make_viral_contig_map.R']

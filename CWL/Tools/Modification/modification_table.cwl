@@ -1,9 +1,10 @@
 #!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: CommandLineTool
-requirements:
+
+hints:
   DockerRequirement:
-    dockerPull: sed_docker:latest
+    dockerPull: mhoelzer/sed_docker:0.1
 
 baseCommand: ['sed', '/^#/d; s/ \+/\t/g']
 

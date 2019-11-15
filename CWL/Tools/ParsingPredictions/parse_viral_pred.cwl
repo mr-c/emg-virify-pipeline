@@ -5,9 +5,11 @@ class: CommandLineTool
 
 label: "Parsing viral predicted files"
 
-requirements:
+hints:
   DockerRequirement:
-    dockerPull: cwl_parse_pred:latest
+    dockerPull: mhoelzer/cwl_parse_pred:0.1
+
+requirements:
   InlineJavascriptRequirement: {}
 
 baseCommand: ['python', '/parse_viral_pred.py']

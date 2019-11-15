@@ -4,9 +4,11 @@ class: CommandLineTool
 
 label: "Viral contig annotation"
 
-requirements:
+hints:
   DockerRequirement:
-    dockerPull: annotation_viral_contigs:latest
+    dockerPull: mhoelzer/annotation_viral_contigs:0.1
+    
+requirements:
   InlineJavascriptRequirement: {}
 
 baseCommand: ['python', '/viral_contigs_annotation.py']

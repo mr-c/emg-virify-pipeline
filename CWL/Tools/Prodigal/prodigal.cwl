@@ -5,9 +5,11 @@ class: CommandLineTool
 
 label: "Protein-coding gene prediction for prokaryotic genomes"
 
-requirements:
+hints:
   DockerRequirement:
-    dockerPull: prodigal_viral:latest
+    dockerPull: mhoelzer/prodigal_viral:0.1
+
+requirements:
   InlineJavascriptRequirement: {}
 
 baseCommand: [prodigal]

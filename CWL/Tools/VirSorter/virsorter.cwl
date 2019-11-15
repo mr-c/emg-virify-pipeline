@@ -5,9 +5,11 @@ class: CommandLineTool
 
 label: "VirSorter"
 
-requirements:
+hints:
   DockerRequirement:
     dockerPull: simroux/virsorter:v1.0.5
+
+requirements:
   InlineJavascriptRequirement: {}
 
 baseCommand: [wrapper_phage_contigs_sorter_iPlant.pl]

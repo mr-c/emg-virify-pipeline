@@ -4,9 +4,11 @@ class: CommandLineTool
 
 label: "Length Filter"
 
-requirements:
+hints:
   DockerRequirement:
-    dockerPull: cwl_length_filter_docker:latest
+    dockerPull: mhoelzer/cwl_length_filter_docker:0.1
+
+requirements:
   InlineJavascriptRequirement: {}
 
 baseCommand: ['python', '/filter_contigs_len.py']

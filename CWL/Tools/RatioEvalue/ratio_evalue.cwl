@@ -4,9 +4,11 @@ class: CommandLineTool
 
 label: "Ratio Evalue table"
 
-requirements:
+hints:
   DockerRequirement:
-    dockerPull: ratio_evalue:latest
+    dockerPull: mhoelzer/ratio_evalue:0.1
+
+requirements:
   InlineJavascriptRequirement: {}
 
 baseCommand: ['python', '/Ratio_Evalue_table.py']

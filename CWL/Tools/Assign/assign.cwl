@@ -4,9 +4,11 @@ class: CommandLineTool
 
 label: "Viral contig assign"
 
-requirements:
+hints:
   DockerRequirement:
-    dockerPull: assign_taxonomy:latest
+    dockerPull: mhoelzer/assign_taxonomy:0.1
+
+requirements:
   InlineJavascriptRequirement: {}
 
 baseCommand: ['python', '/contig_taxonomic_assign.py']

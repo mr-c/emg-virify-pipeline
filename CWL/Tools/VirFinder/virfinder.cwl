@@ -6,9 +6,11 @@ label: "VirFinder is a method for finding viral contigs from de novo assemblies.
 
 # Output of this tool is saved to file <VirFinder_output.tsv>
 
-requirements:
+hints:
   DockerRequirement:
-    dockerPull: virfinder_viral:latest
+    dockerPull: mhoelzer/virfinder_viral:0.1
+
+requirements:
   InlineJavascriptRequirement: {}
 
 baseCommand: [run_virfinder.Rscript]
