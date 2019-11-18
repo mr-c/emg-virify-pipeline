@@ -6,7 +6,6 @@ label: "Length Filter"
 
 hints:
   DockerRequirement:
-    #dockerImageId: /hps/nobackup2/singularity/mhoelzer/mhoelzer-cwl-length-filter-docker-0.1.img
     dockerPull: mhoelzer/cwl_length_filter_docker:0.1
 
 requirements:

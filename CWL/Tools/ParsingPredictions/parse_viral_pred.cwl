@@ -7,7 +7,6 @@ label: "Parsing viral predicted files"
 
 hints:
   DockerRequirement:
-    #dockerImageId: /hps/nobackup2/singularity/mhoelzer/mhoelzer-cwl-parse-pred-0.1.img
     dockerPull: mhoelzer/cwl_parse_pred:0.1
 
 requirements:

@@ -7,7 +7,6 @@ label: "Protein-coding gene prediction for prokaryotic genomes"
 
 hints:
   DockerRequirement:
-    #dockerImageId: /hps/nobackup2/singularity/mhoelzer/mhoelzer-prodigal-viral-0.1.img
     dockerPull: mhoelzer/prodigal_viral:0.1
 
 requirements:

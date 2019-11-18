@@ -6,7 +6,6 @@ label: "Viral contig annotation"
 
 hints:    
   DockerRequirement:
-    #dockerImageId: /hps/nobackup2/singularity/mhoelzer/mhoelzer-annotation-viral-contigs-0.1.img
     dockerPull: mhoelzer/annotation_viral_contigs:0.1
     
 requirements:

@@ -4,7 +4,6 @@ class: CommandLineTool
 
 hints:
   DockerRequirement:
-    #dockerImageId: /hps/nobackup2/singularity/mhoelzer/mhoelzer-sed-docker-0.1.img
     dockerPull: mhoelzer/sed_docker:0.1
 
 baseCommand: ['sed', '/^#/d; s/ \+/\t/g']

@@ -7,7 +7,6 @@ label: "VirSorter"
 
 hints:
   DockerRequirement:
-    #dockerImageId: /hps/nobackup2/singularity/mhoelzer/simroux-virsorter-v1.0.5.img
     dockerPull: simroux/virsorter:v1.0.5
 
 requirements:
