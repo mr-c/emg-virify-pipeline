@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+##################################################
+## hoelzer.martin@gmail.com
+#
+# Run CWL pipeline on LSF cluster w/ toil support. 
+
 # these command activate our pipeline env. Maybe you can skip them and start only with toil activate
 #source /hps/nobackup2/production/metagenomics/pipeline/testing/varsha/test_env.rc
 #export PATH=$PATH:/homes/emgpr/.nvm/versions/node/v12.10.0/bin/

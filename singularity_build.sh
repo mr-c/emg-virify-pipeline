@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
+#########################################
+## hoelzer.martin@gmail.com
+#
 # configure everything on the EBI cluster
 
-ln -s /homes/mhoelzer/data/nextflow-databases/virsorter/virsorter-data /homes/mhoelzer/backuped/git/CWL_viral_pipeline/CWL/Tools/VirSorter
+#ln -s /homes/mhoelzer/data/nextflow-databases/virsorter/virsorter-data /homes/mhoelzer/backuped/git/CWL_viral_pipeline/CWL/Tools/VirSorter
 
 DIR=/hps/nobackup2/singularity/mhoelzer/build
 mkdir -p $DIR/.singularity

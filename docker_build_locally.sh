@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
+###################################
+# hoelzer.martin@gmail.com
+#
+# This script builds the docker containers needed and pushs them to the mhoelzer dockerhub.
+
 CURRENT=`pwd`
 DIR='/Users/mhoelzer/git/CWL_viral_pipeline/CWL/Tools/'
 
-ln -s /Users/mhoelzer/git/What_the_Phage/nextflow-autodownload-databases/virsorter/virsorter-data ${DIR}/VirSorter/
+#ln -s /Users/mhoelzer/git/What_the_Phage/nextflow-autodownload-databases/virsorter/virsorter-data ${DIR}/VirSorter/
 
 TOOL='LengthFiltering/'
 cd ${DIR}/${TOOL}
@@ -63,7 +68,7 @@ cd ${CURRENT}
 
 TOOL='Prodigal/'
 cd ${DIR}/${TOOL}
-#I used nanozoo/prodigal as a template
+#I used nanozoo/prodigal as a template to get this docker working
 NAME='prodigal_viral' 
 docker build -t ${NAME}:latest .
 docker tag ${NAME}:latest mhoelzer/${NAME}:0.1
@@ -81,7 +86,7 @@ cd ${CURRENT}
 #NOT DONE
 TOOL='VirFinder/'
 cd ${DIR}/${TOOL}
-#I used multifractal/virfinder as a template
+#I used multifractal/virfinder as a template to get this docker working
 NAME='virfinder_viral'
 docker build -t ${NAME}:latest .
 docker tag ${NAME}:latest mhoelzer/${NAME}:0.1
