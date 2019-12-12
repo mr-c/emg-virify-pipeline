@@ -6,11 +6,11 @@
 # Run CWL pipeline on LSF cluster w/ toil support. 
 
 # these command activate our pipeline env. Maybe you can skip them and start only with toil activate
-#source /hps/nobackup2/production/metagenomics/pipeline/testing/varsha/test_env.rc
-#export PATH=$PATH:/homes/emgpr/.nvm/versions/node/v12.10.0/bin/
-#export PATH=/hps/nobackup2/production/metagenomics/pipeline/tools-v5/miniconda2-4.6.14/bin:$PATH
-#export PERL5LIB=/hps/nobackup2/production/metagenomics/pipeline/tools-v5/genome-properties/code/modules:$PERL5LIB
-#export CONDA_ENV=/hps/nobackup2/production/metagenomics/pipeline/tools-v5/miniconda2-4.6.14/bin/activate
+source /hps/nobackup2/production/metagenomics/pipeline/testing/varsha/test_env.rc
+export PATH=$PATH:/homes/emgpr/.nvm/versions/node/v12.10.0/bin/
+export PATH=/hps/nobackup2/production/metagenomics/pipeline/tools-v5/miniconda2-4.6.14/bin:$PATH
+export PERL5LIB=/hps/nobackup2/production/metagenomics/pipeline/tools-v5/genome-properties/code/modules:$PERL5LIB
+export CONDA_ENV=/hps/nobackup2/production/metagenomics/pipeline/tools-v5/miniconda2-4.6.14/bin/activate
 
 # activate TOIL env
 source /hps/nobackup2/production/metagenomics/pipeline/tools-v5/toil-user-env/bin/activate
