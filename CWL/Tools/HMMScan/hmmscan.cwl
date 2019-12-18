@@ -7,7 +7,7 @@ label: "Biosequence analysis using profile hidden Markov models"
 
 hints:
   DockerRequirement:
-    dockerPull: biocontainers/hmmer:v3.2.1dfsg-1-deb_cv1
+    dockerPull: mhoelzer/hmmscan:0.1
 
 requirements:
   InlineJavascriptRequirement: {}
