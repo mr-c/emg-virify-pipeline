@@ -12,7 +12,7 @@ hints:
 requirements:
   InlineJavascriptRequirement: {}
 
-baseCommand: ['python', '/parse_viral_pred.py']
+baseCommand: ['python', 'parse_viral_pred.py']
 
 inputs:
   assembly:

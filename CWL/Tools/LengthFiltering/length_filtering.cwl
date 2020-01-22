@@ -11,7 +11,7 @@ hints:
 requirements:
   InlineJavascriptRequirement: {}
 
-baseCommand: ['python', '/filter_contigs_len.py']
+baseCommand: ["filter_contigs_len.py"]
 arguments: ["-l", "0.5"]
 
 inputs:

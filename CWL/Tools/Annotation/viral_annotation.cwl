@@ -11,7 +11,7 @@ hints:
 requirements:
   InlineJavascriptRequirement: {}
 
-baseCommand: ['python', '/viral_contigs_annotation.py']
+baseCommand: ['python', 'viral_contigs_annotation.py']
 arguments: ["-o", $(runtime.outdir)]
 
 inputs:

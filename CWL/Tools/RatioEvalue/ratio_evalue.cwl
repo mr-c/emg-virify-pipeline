@@ -11,7 +11,7 @@ hints:
 requirements:
   InlineJavascriptRequirement: {}
 
-baseCommand: ['python', '/Ratio_Evalue_table.py']
+baseCommand: ['python', 'Ratio_Evalue_table.py']
 arguments: ["-o", $(runtime.outdir)]
 
 inputs:

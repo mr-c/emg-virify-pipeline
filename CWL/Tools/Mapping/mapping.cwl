@@ -11,7 +11,7 @@ hints:
 requirements:
   InlineJavascriptRequirement: {}
 
-baseCommand: ['Rscript', '/Make_viral_contig_map.R']
+baseCommand: ['Rscript', 'Make_viral_contig_map.R']
 arguments: ["-o", $(inputs.input_table.nameroot)_mapping_results]
 
 inputs:
