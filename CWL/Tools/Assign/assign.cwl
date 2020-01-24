@@ -11,7 +11,7 @@ hints:
 requirements:
   InlineJavascriptRequirement: {}
 
-baseCommand: ['python', 'contig_taxonomic_assign.py']
+baseCommand: ['contig_taxonomic_assign.py']
 
 inputs:
   input_table:
