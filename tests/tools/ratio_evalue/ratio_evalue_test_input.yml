@@ -1,0 +1,3 @@
+input_table:
+  class: File
+  path: input_files/hmmer_ViPhOG_modified.tbl

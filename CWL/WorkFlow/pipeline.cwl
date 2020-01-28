@@ -45,11 +45,6 @@ outputs:
     type:
       type: array
       items: File
-  output_final_mapping:
-    outputSource: subworkflow_for_each_fasta/mapping_results
-    type:
-      type: array
-      items: Directory
   output_final_assign:
     outputSource: subworkflow_for_each_fasta/assign_results
     type:
@@ -101,7 +96,6 @@ steps:
       - modification_out
       - ratio_evalue_table
       - annotation_table
-      - mapping_results
       - assign_results
 
     scatter: fasta_file
@@ -128,6 +122,6 @@ doc: |
                    |      /             r
                    |     /              k
                   Annotation            F
-                     |    \             l
-                     |     \            o
-                  Mapping   Assign   -- w
+                     |                  l
+                     |                  o
+                   Assign            -- w

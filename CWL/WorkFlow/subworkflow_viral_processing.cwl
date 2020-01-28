@@ -29,9 +29,6 @@ outputs:
   annotation_table:
     outputSource: annotation/annotation_table
     type: File
-  mapping_results:
-    outputSource: mapping/folder
-    type: Directory
   assign_results:
     outputSource: assign/assign_table
     type: File
@@ -74,15 +71,6 @@ steps:
     out:
       - annotation_table
     run: ../Tools/Annotation/viral_annotation.cwl
-
-  mapping:
-    in:
-      input_table: annotation/annotation_table
-    out:
-      - folder
-      - stdout
-      - stderr
-    run: ../Tools/Mapping/mapping.cwl
 
   assign:
     in:

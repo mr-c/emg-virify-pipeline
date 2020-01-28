@@ -1,0 +1,10 @@
+assembly:
+  class: File
+  path: inputs_files/ERR575691_host_filtered_filt300bp.fasta
+virfinder_tsv:
+  class: File
+  path: inputs_files/Files/output.tsv
+virsorter_dir:
+  class: Directory
+  path: inputs_files/VirSorter/Predicted_viral_sequences
+output_dir: .

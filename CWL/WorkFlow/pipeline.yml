@@ -1,3 +1,0 @@
-input_fasta_file:
-  class: File
-  path: ../Files_for_test/ERR575691_host_filtered.fasta

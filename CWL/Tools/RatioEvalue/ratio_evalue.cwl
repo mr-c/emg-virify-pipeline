@@ -11,7 +11,7 @@ hints:
 requirements:
   InlineJavascriptRequirement: {}
 
-baseCommand: ['Ratio_Evalue_table.py']
+baseCommand: ['ratio_evalue_table.py']
 arguments: ["-o", $(runtime.outdir)]
 
 inputs:
@@ -20,6 +20,11 @@ inputs:
     inputBinding:
       separate: true
       prefix: "-i"
+  taxa_dict:
+    type: File
+    inputBinding:
+      separate: true
+      prefix: "-t"
 
 outputs:
   stdout: stdout

@@ -14,4 +14,4 @@ RUN pip install -q pandas xlrd
 COPY . /
 
 
-CMD ["python", "/Ratio_evalue_table.py"]
+CMD ["python", "/ratio_evalue_table.py"]
