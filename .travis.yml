@@ -3,7 +3,7 @@ python: 3.7
 
 install:
   # VirSorter DB (this is cached)
-  - bash travis/download_databases.sh $TRAVIS_BUILD_DIR/databases-cache
+  - bash travis/download_databases.sh $TRAVIS_BUILD_DIR/databases
   # CONDA and the env
   - wget "https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh" -O miniconda.sh
   - bash miniconda.sh -b -p $HOME/miniconda
@@ -22,6 +22,6 @@ script:
 
 cache:
   directories:
-    - $TRAVIS_BUILD_DIR/databases-cache/
+    - $TRAVIS_BUILD_DIR/databases
     # TODO: If the env changes then the cache has to be manually cleaned
     # - $HOME/miniconda
