@@ -23,4 +23,4 @@ cache:
   directories:
     - $TRAVIS_BUILD_DIR/virsorter-data-cache/
     # TODO: If the env changes then the cache has to be manually cleaned
-    - $HOME/miniconda
+    # - $HOME/miniconda
