@@ -1,6 +1,9 @@
 fasta_file:
   class: File
-  path: input_files/Files/ERR575691_host_filtered_filt300bp.fasta
-data:
+  path: ERR575691_host_filtered_filt300bp.fasta
+data_dir:
   class: Directory
-  path: virsorter-data
+  path: ../../../databases/virsorter_data
+  doc: |
+    Symlink to the folder. On travis this folder is cached.
+    Locally, please run ln -s /path/to/virsorter_data_dir virsorter_data_dir

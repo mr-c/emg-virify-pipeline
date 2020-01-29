@@ -1,13 +1,11 @@
-#!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: CommandLineTool
 
-
 label: "Parsing viral predicted files"
 
-hints:
-  DockerRequirement:
-    dockerPull: mhoelzer/cwl_parse_pred:0.1
+#hints:
+#  DockerRequirement:
+#    dockerPull: mhoelzer/cwl_parse_pred:0.1
 
 requirements:
   InlineJavascriptRequirement: {}
@@ -58,7 +56,7 @@ outputs:
 doc: |
   usage: parse_viral_pred.py [-h] -a ASSEMB -f FINDER -s SORTER [-o OUTDIR]
 
-  description: script generates three output_files: High_confidence.fasta, Low_confidence.fasta, Prophages.fasta
+  description: script generates three output_files: high_confidence.fasta, low_confidence.fasta, Prophages.fasta
 
   optional arguments:
   -h, --help            show this help message and exit

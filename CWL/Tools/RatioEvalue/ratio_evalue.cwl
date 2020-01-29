@@ -1,12 +1,11 @@
-#!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: CommandLineTool
 
 label: "Ratio Evalue table"
 
-hints:
-  DockerRequirement:
-    dockerPull: mhoelzer/ratio_evalue:0.1
+#hints:
+#  DockerRequirement:
+#    dockerPull: mhoelzer/ratio_evalue:0.1
 
 requirements:
   InlineJavascriptRequirement: {}
@@ -20,11 +19,13 @@ inputs:
     inputBinding:
       separate: true
       prefix: "-i"
-  taxa_dict:
+  hmms_serialized:
     type: File
     inputBinding:
       separate: true
       prefix: "-t"
+    doc: |
+      "hmms_serialized file with the HMM generated with hmms_generation/generate_vphmm_object.py"
 
 outputs:
   stdout: stdout

@@ -4,9 +4,9 @@ class: CommandLineTool
 
 label: "Viral contig mapping"
 
-hints:
-  DockerRequirement:
-    dockerPull: mhoelzer/mapping_viral_predictions:0.1
+#hints:
+#  DockerRequirement:
+#    dockerPull: mhoelzer/mapping_viral_predictions:0.1
 
 requirements:
   InlineJavascriptRequirement: {}

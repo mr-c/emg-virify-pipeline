@@ -1,4 +1,3 @@
-#!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: CommandLineTool
 
@@ -6,9 +5,9 @@ label: "VirFinder is a method for finding viral contigs from de novo assemblies.
 
 # Output of this tool is saved to file <VirFinder_output.tsv>
 
-hints:
-  DockerRequirement:
-    dockerPull: mhoelzer/virfinder_viral:0.1
+#hints:
+#  DockerRequirement:
+#    dockerPull: mhoelzer/virfinder_viral:0.1
 
 requirements:
   InlineJavascriptRequirement: {}

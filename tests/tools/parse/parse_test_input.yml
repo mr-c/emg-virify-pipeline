@@ -1,0 +1,9 @@
+assembly:
+  class: File
+  path: ERR575691_host_filtered_filt300bp.fasta
+virfinder_tsv:
+  class: File
+  path: virfinder_output.tsv
+virsorter_dir:
+  class: Directory
+  path: virsorter_results

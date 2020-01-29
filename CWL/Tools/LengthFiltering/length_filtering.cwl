@@ -4,9 +4,9 @@ class: CommandLineTool
 
 label: "Length Filter"
 
-hints:
-  DockerRequirement:
-    dockerPull: mhoelzer/cwl_length_filter_docker:0.1
+#hints:
+#  DockerRequirement:
+#    dockerPull: mhoelzer/cwl_length_filter_docker:0.1
 
 requirements:
   InlineJavascriptRequirement: {}

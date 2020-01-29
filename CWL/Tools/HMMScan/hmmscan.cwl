@@ -2,12 +2,11 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
-
 label: "Biosequence analysis using profile hidden Markov models"
 
-hints:
-  DockerRequirement:
-    dockerPull: mhoelzer/hmmscan:0.1
+#hints:
+#  DockerRequirement:
+#    dockerPull: mhoelzer/hmmscan:0.1
 
 requirements:
   InlineJavascriptRequirement: {}
@@ -22,7 +21,7 @@ arguments:
   - prefix: --domtblout
     valueFrom: $(inputs.seqfile.nameroot)_hmmscan.tbl
     position: 3
-  - valueFrom: /vpHMM_database/vpHMM_database
+  - valueFrom: /home/mbc/projects/cwl_viral_pipeline/CWL/Tools/HMMScan/vpHMM/vpHMM_database
     position: 4
   - valueFrom: --noali
     position: 1

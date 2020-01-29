@@ -1,3 +1,6 @@
 input_table:
   class: File
-  path: input_files/hmmer_ViPhOG_modified.tbl
+  path: hmmer_ViPhOG_modified.tbl
+hmms_serialized:
+  class: File
+  path: ../../../databases/vphmm_2020-01-29.pickle

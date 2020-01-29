@@ -1,10 +1,12 @@
 language: python
 python: 3.7
 
-before_install:
-  - bash travis/download_virsoter_db.sh $TRAVIS_BUILD_DIR/virsorter-data-cache
-
 install:
+  # VirSorter DB (this is cached)
+  - bash travis/download_databases.sh $TRAVIS_BUILD_DIR/databases-cache
+  - ln -s $TRAVIS_BUILD_DIR/databases-cache/vpHMM databases/vpHMM
+  - ln -s $TRAVIS_BUILD_DIR/databases-cache/virsorter_data databases/virsorter_data
+  # CONDA and the env
   - wget "https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh" -O miniconda.sh
   - bash miniconda.sh -b -p $HOME/miniconda
   - source "$HOME/miniconda/etc/profile.d/conda.sh"
@@ -14,6 +16,8 @@ install:
   # Pipeline env
   - conda env create -f requirements/conda_env.yml
   - conda activate viral_pipeline
+  # Env variables
+  - export PATH=$TRAVIS_BUILD_DIR/scripts:PATH
 
 script:
   - echo "Hi!"
@@ -21,6 +25,6 @@ script:
 
 cache:
   directories:
-    - $TRAVIS_BUILD_DIR/virsorter-data-cache/
+    - $TRAVIS_BUILD_DIR/databases-cache/
     # TODO: If the env changes then the cache has to be manually cleaned
     # - $HOME/miniconda

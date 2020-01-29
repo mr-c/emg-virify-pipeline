@@ -1,13 +1,11 @@
-#!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: CommandLineTool
 
-
 label: "Protein-coding gene prediction for prokaryotic genomes"
 
-hints:
-  DockerRequirement:
-    dockerPull: mhoelzer/prodigal_viral:0.1
+#hints:
+#  DockerRequirement:
+#    dockerPull: mhoelzer/prodigal_viral:0.1
 
 requirements:
   InlineJavascriptRequirement: {}

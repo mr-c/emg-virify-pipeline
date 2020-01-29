@@ -4,9 +4,9 @@ class: CommandLineTool
 
 label: "Viral contig assign"
 
-hints:
-  DockerRequirement:
-    dockerPull: mhoelzer/assign_taxonomy:0.1
+#hints:
+#  DockerRequirement:
+#    dockerPull: mhoelzer/assign_taxonomy:0.1
 
 requirements:
   InlineJavascriptRequirement: {}

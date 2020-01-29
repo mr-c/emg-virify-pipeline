@@ -1,13 +1,11 @@
-#!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: CommandLineTool
 
-
 label: "VirSorter"
 
-hints:
-  DockerRequirement:
-    dockerPull: simroux/virsorter:v1.0.5
+#hints:
+#  DockerRequirement:
+#    dockerPull: simroux/virsorter:v1.0.5
 
 requirements:
   InlineJavascriptRequirement: {}
@@ -22,15 +20,10 @@ inputs:
     inputBinding:
       separate: true
       prefix: "-f"
-  data:
-    type: Directory?
-    default:
-      class: Directory
-      path:  virsorter-data
-      listing: []
-      basename: virsorter-data
+  data_dir:
+    type: Directory
     inputBinding:
-      prefix: --data-dir
+      prefix: "--data-dir"
   dataset:
     type: string?
     inputBinding:
@@ -111,7 +104,7 @@ doc: |
                      that you want to be included in several different analyses and want
                      to save the database and point VirSorter to it in subsequent runs.
                      By default, this is off, and you should only specify this flag if
-                     you're SURE you need it.
+                     you are SURE you need it.
       --no_c         Use this option if you have issues with empty output files, i.e. 0
                      viruses predicted by VirSorter. This make VirSorter use a perl function
                      instead of the C script to calculate enrichment statistics. Note that

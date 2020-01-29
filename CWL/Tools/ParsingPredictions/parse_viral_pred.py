@@ -197,10 +197,10 @@ if __name__ == "__main__":
 		viral_predictions = virus_parser(assembly_file=args.assemb, VF_output=args.finder, VS_output=args.sorter)
 		if sum([len(x) for x in viral_predictions]) > 0:
 			if len(viral_predictions[0]) > 0:
-				SeqIO.write(viral_predictions[0], os.path.join(args.outdir, "High_confidence_putative_viral_contigs.fna"), "fasta")
+				SeqIO.write(viral_predictions[0], os.path.join(args.outdir, "high_confidence_putative_viral_contigs.fna"), "fasta")
 			if len(viral_predictions[1]) > 0:
-				SeqIO.write(viral_predictions[1], os.path.join(args.outdir, "Low_confidence_putative_viral_contigs.fna"), "fasta")
+				SeqIO.write(viral_predictions[1], os.path.join(args.outdir, "low_confidence_putative_viral_contigs.fna"), "fasta")
 			if len(viral_predictions[2]) > 0:
-				SeqIO.write(viral_predictions[2], os.path.join(args.outdir, "Putative_prophages.fna"), "fasta")
+				SeqIO.write(viral_predictions[2], os.path.join(args.outdir, "putative_prophages.fna"), "fasta")
 		else:
 			print("Overall, no putative viral contigs or prophages were detected in the analysed metagenomic assembly")

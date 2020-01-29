@@ -1,5 +1,5 @@
-class: Workflow
 cwlVersion: v1.0
+class: Workflow
 
 requirements:
   SubworkflowFeatureRequirement: {}  
@@ -11,13 +11,17 @@ requirements:
 inputs:
   input_fasta_file:  # input assembly
     type: File
-
-  virsorter_data:
+  virsorter_data_dir:
     type: Directory
     default:
-      class: Directory
-      path:  ../Tools/VirSorter/virsorter-data
-
+      ../../databases/virsorter-data
+  hmms_serialized_file:
+    type: File
+    default:
+      ../../databases/vphmm_2020-01-29.pickle
+    doc:
+      See Tools/RatioEvalue/ratio_evalue.cwl > hmms_serialized parameter
+      Current version /databases/vphmm_2020-01-29.pickle.
 
 outputs:
   output_length_filtering:
@@ -69,8 +73,8 @@ steps:
 
   virsorter:
     in:
-      data: virsorter_data
       fasta_file: length_filter/filtered_contigs_fasta
+      data_dir: virsorter_data_dir
     out:
       - predicted_viral_seq_dir
     run: ../Tools/VirSorter/virsorter.cwl
@@ -90,6 +94,7 @@ steps:
   subworkflow_for_each_fasta:
     in:
       fasta_file: parse_pred_contigs/output_fastas  # array
+      hmms_serialized_file: hmms_serialized_file
     out:
       - prodigal_out
       - hmmscan_out

@@ -1,4 +1,3 @@
-#!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: Workflow
 
@@ -12,6 +11,10 @@ requirements:
 inputs:
   fasta_file:
     type: File
+  hmms_serialized_file:
+    type: File
+    doc: |
+      "RatioEvalue hmms_serialized file with the HMM"
 
 outputs:
   prodigal_out:
@@ -59,6 +62,7 @@ steps:
   ratio_evalue:
     in:
       input_table: hmm_postprocessing/modified_file
+      hmms_serialized: hmms_serialized_file
     out:
       - informative_table
     run: ../Tools/RatioEvalue/ratio_evalue.cwl
