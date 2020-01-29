@@ -5,7 +5,7 @@ before_install:
   - travis/get_virsorter_db.sh $TRAVIS_BUILD_DIR/virsorter-data-cache
 
 install:
-  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+  - wget "https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh" -O miniconda.sh
   - bash miniconda.sh -b -p $HOME/miniconda
   - source "$HOME/miniconda/etc/profile.d/conda.sh"
   - hash -r
@@ -15,9 +15,9 @@ install:
   - conda env create -f requirements/conda_env.yml
   - conda activate viral_pipeline
 
-  script:
-    - echo "Hi!"
-    #- bash run_tests.sh
+script:
+  - echo "Hi!"
+  #- bash run_tests.sh
 
 cache:
   directories:
