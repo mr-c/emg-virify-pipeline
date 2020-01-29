@@ -2,7 +2,7 @@ language: python
 python: 3.7
 
 before_install:
-  - travis/get_virsorter_db.sh $TRAVIS_BUILD_DIR/virsorter-data-cache
+  - travis/download_virsoter_db.sh $TRAVIS_BUILD_DIR/virsorter-data-cache
 
 install:
   - wget "https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh" -O miniconda.sh
