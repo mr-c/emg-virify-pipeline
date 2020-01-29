@@ -39,11 +39,12 @@
   tool: ../CWL/Tools/HMMScan/hmmscan.cwl
   output:
     output_table:
-      basename: high_confidence_putative_viral_contigs_prodigal_hmmscan.tbl
       class: File
+      basename: high_confidence_putative_viral_contigs_prodigal_hmmscan.tbl
+      checksum: sha1$71a44cb6a36d39521c0a5ed57adc560363fe99cd
       location: Any
       path: Any
-      size: 147451
+      size: 147563
 
 # Length Filtering
 - job: tools/length_filtering/length_filtering_test_input.yml

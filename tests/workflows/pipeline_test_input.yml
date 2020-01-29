@@ -7,3 +7,6 @@ input_fasta_file:
 hmms_serialized_file:
   class: File
   path: ../../databases/vphmm_2020-01-29.pickle
+hmmscan_database_directory:
+  class: Directory
+  path: ../../databases/vpHMM

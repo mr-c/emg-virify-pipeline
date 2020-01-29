@@ -13,21 +13,27 @@ requirements:
 
 baseCommand: ["hmmscan"]
 
-arguments:
+outputs:
+  output_table:
+    type: File
+    outputBinding:
+      glob: "*hmmscan.tbl"
 
+arguments:
   - prefix: -E
     valueFrom: "0.001"
     position: 2
   - prefix: --domtblout
     valueFrom: $(inputs.seqfile.nameroot)_hmmscan.tbl
     position: 3
-  - valueFrom: /home/mbc/projects/cwl_viral_pipeline/CWL/Tools/HMMScan/vpHMM/vpHMM_database
+  - valueFrom: $(inputs.database.path)/vpHMM_database
     position: 4
   - valueFrom: --noali
     position: 1
 
 inputs:
-
+  database:
+    type: Directory
   seqfile:
     type: File
     inputBinding:
@@ -35,10 +41,3 @@ inputs:
       separate: true
 
 stdout: stdout.txt
-
-outputs:
-
-  output_table:
-    type: File
-    outputBinding:
-      glob: "*hmmscan.tbl"

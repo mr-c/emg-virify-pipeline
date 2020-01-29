@@ -15,5 +15,5 @@ then
   mkdir -p "$1/vpHMM"
   wget \
     ftp://ftp.ebi.ac.uk/pub/databases/metagenomics/vpHMM_database.tar.gz -qO - | \
-    tar --extract --gzip --verbose --file=/dev/stdin --directory="$1" --strip-components=1
+    tar --extract --gzip --verbose --file=/dev/stdin --directory="$1/vpHMM" --strip-components=1
 fi

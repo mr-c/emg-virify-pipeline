@@ -22,6 +22,13 @@ inputs:
     doc:
       See Tools/RatioEvalue/ratio_evalue.cwl > hmms_serialized parameter
       Current version /databases/vphmm_2020-01-29.pickle.
+  hmmscan_database_directory:
+    type: Directory
+    default:
+      ../../databases/vpHMM
+    doc: |
+      HMMScan Viral HMM (databases/vpHMM/vpHMM_database).
+      NOTE: it needs to be a full path.      
 
 outputs:
   output_length_filtering:
@@ -95,6 +102,7 @@ steps:
     in:
       fasta_file: parse_pred_contigs/output_fastas  # array
       hmms_serialized_file: hmms_serialized_file
+      hmmscan_database: hmmscan_database_directory
     out:
       - prodigal_out
       - hmmscan_out

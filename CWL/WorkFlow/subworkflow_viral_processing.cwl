@@ -14,7 +14,12 @@ inputs:
   hmms_serialized_file:
     type: File
     doc: |
-      "RatioEvalue hmms_serialized file with the HMM"
+      RatioEvalue hmms_serialized file with the HMM
+  hmmscan_database:
+    type: Directory
+    doc: |
+      HMMScan Viral HMM (databases/vpHMM/vpHMM_database).
+      NOTE: it needs to be a full path.
 
 outputs:
   prodigal_out:
@@ -48,6 +53,7 @@ steps:
   hmmscan:
     in:
       seqfile: prodigal/output_fasta
+      database: hmmscan_database
     out:
       - output_table
     run: ../Tools/HMMScan/hmmscan.cwl
