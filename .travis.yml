@@ -1,32 +1,26 @@
-os: linux
-
 language: python
-python: 3.6
-
-install:
-  - pip install -q cwl-runner cwltest cwltool
-script:
-  - echo -e '#!/bin/bash\ncwltool --parallel "$@"' > pcwltool
-
-# Caching from https://github.com/travis-ci/travis-ci/issues/5358#issuecomment-248915326
-before_cache:
-  # Save tagged docker images
-  - >
-    mkdir -p $HOME/docker && docker images -a --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
-    | xargs -n 2 -t sh -c 'test -e $HOME/docker/$1.tar.gz || docker save $0 | gzip -2 > $HOME/docker/$1.tar.gz'
+python: 3.7
 
 before_install:
-  # Load cached docker images
-  - if [[ -d $HOME/docker ]]; then ls $HOME/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
+  - travis/get_virsorter_db.sh $TRAVIS_BUILD_DIR/virsorter-data-cache
+
+install:
+  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - source "$HOME/miniconda/etc/profile.d/conda.sh"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda info -a
+  # Pipeline env
+  - conda env create -f requirements/conda_env.yml
+  - conda activate viral_pipeline
+
+  script:
+    - echo "Hi!"
+    #- bash run_tests.sh
 
 cache:
-  bundler: true
   directories:
-    - $HOME/docker
     - $TRAVIS_BUILD_DIR/virsorter-data-cache/
-
-deploy:
-  provider: script
-  script: bash $TRAVIS_BUILD_DIR/docker_push.sh
-  on:
-    branch: master
+    # TODO: If the env changes then the cache has to be manually cleaned
+    - $HOME/miniconda

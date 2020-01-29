@@ -1,6 +1,6 @@
 input_fasta_file:
   class: File
-  path: input_files/ERR575691_host_filtered.fasta
+  path: ERR575691_host_filtered.fasta
 taxa_dict:
   class: File
   path: path/to/vphmm_taxa_dict.pickle

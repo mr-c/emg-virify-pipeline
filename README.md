@@ -171,3 +171,9 @@ Script generates tabular file with taxonomic assignment of viral contigs based o
                   Assign             -- w
                                               
 ```
+
+# Tests
+
+CWL tests are executed with (cwltest)[https://github.com/common-workflow-language/cwltest].
+
+Please refer to `run_tests.sh`.

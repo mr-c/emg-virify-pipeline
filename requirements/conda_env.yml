@@ -1,4 +1,4 @@
-name: null
+name: viral_pipeline
 channels:
   - r
   - conda-forge
@@ -408,5 +408,3 @@ dependencies:
     - webencodings==0.5.1
     - websocket-client==0.57.0
     - xlrd==1.2.0
-prefix: /nfs/production/interpro/metagenomics/viral_pipeline
-

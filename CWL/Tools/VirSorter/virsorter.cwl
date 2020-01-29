@@ -84,13 +84,6 @@ outputs:
      outputBinding:
         glob: virsorter-out/Predicted_viral_sequences/
 
-#  output_fasta:
-#    type:
-#      type: array
-#      items: File
-#    outputBinding:
-#      glob: virsorter-out/Predicted_viral_sequences/*[1,2,3,4,5].fasta  #  virsorter: virsorter-out/Predicted_viral_sequences/*[1,2,3,4,5].fasta
-
 doc: |
   usage: wrapper_phage_contigs_sorter_iPlant.pl --fasta sequences.fa
 
