@@ -15,10 +15,12 @@ install:
   - conda env create -f requirements/conda_env.yml
   - conda activate viral_pipeline
   # Env variables
-  - export export PATH=$TRAVIS_BUILD_DIR/scripts:$PATH
+  - chmod +x $TRAVIS_BUILD_DIR/scripts/*
+  - export PATH=$TRAVIS_BUILD_DIR/scripts:$PATH
 
 script:
-  - cwltest --test tests/tests.yml --tool cwltool -j 12 --verbose --timeout 2400
+  - cd $TRAVIS_BUILD_DIR/tests
+  - cwltest --test tests.yml --tool cwltool -j 12 --verbose --timeout 2400
 
 cache:
   directories:

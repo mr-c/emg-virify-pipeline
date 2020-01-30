@@ -2,6 +2,8 @@
 # Annotation
 - job: tools/annotation/viral_annotation_input.yml
   tool: ../CWL/Tools/Annotation/viral_annotation.cwl
+  short_name: viral_annotation.cwl
+  doc: "Viral annotation"
   output:
     annotation_table:
       class: File
@@ -14,43 +16,53 @@
 # Assign
 - job: tools/assign/assign_test_input.yml
   tool: ../CWL/Tools/Assign/assign.cwl
-  output:
+  short_name: assign.cwl
+  doc: "Assign"
+  output: &assign
     assign_table:
       class: File
       basename: high_confidence_putative_viral_contigs_prot_ann_table_tax_assign.tsv
+      # doesn't guarantee order.
+      checksum: Any
       location: Any
       path: Any
-      size: 468
+      size: 554
     stderr:
       class: File
       basename: stderr.txt
+      checksum: sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709
       location: Any
       path: Any
-      size: 15583
+      size: 0
     stdout:
       class: File
       basename: stdout.txt
+      checksum: sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709
       location: Any
       path: Any
-      size: 66748
+      size: 0
 
 # HMMScan
 - job: tools/hmmscan/hmmscan_test_input.yml
   tool: ../CWL/Tools/HMMScan/hmmscan.cwl
+  short_name: hmmscan.cwl
+  doc: "HMMScan"
   output:
-    output_table:
+    output_table: &hmmscan
       class: File
       basename: high_confidence_putative_viral_contigs_prodigal_hmmscan.tbl
-      checksum: sha1$71a44cb6a36d39521c0a5ed57adc560363fe99cd
+      checksum: Any
       location: Any
       path: Any
-      size: 147563
+      size: Any
 
 # Length Filtering
 - job: tools/length_filtering/length_filtering_test_input.yml
   tool: ../CWL/Tools/LengthFiltering/length_filtering.cwl
+  short_name: length_filtering.cwl
+  doc: Filter multi-fasta by length
   output:
-    filtered_contigs_fasta:
+    filtered_contigs_fasta: &lf
       class: File
       basename: ERR575691_host_filtered_filt500bp.fasta
       checksum: sha1$d15b69ff3be57c036f8c4585d21855b4bc686c56
@@ -61,6 +73,8 @@
 # Modification
 - job: tools/modification/modification_test_input.yml
   tool: ../CWL/Tools/Modification/processing_hmm_result.cwl
+  short_name: processing_hmm_result.cwl
+  doc: Modification
   output:
     modified_file:
       class: File
@@ -73,7 +87,9 @@
 # Parse
 - job: tools/parse/parse_test_input.yml
   tool: ../CWL/Tools/ParsingPredictions/parse_viral_pred.cwl
-  output:
+  short_name: parse_viral_pred.cwl
+  doc: Parse viral predictions
+  output: &parse
     output_fastas:
       - class: File
         basename: high_confidence_putative_viral_contigs.fna
@@ -108,33 +124,37 @@
 
 # Prodigal
 - job: tools/prodigal/prodigal_test_input.yml
-  tool: ../CWL/Tools/Prodigal/prodigal.cwl 
-  output:
+  tool: ../CWL/Tools/Prodigal/prodigal.cwl
+  short_name: prodigal.cwl
+  doc: Prodigal
+  output: &prodigal
     output_fasta:
       class: File
       basename: high_confidence_putative_viral_contigs_prodigal.faa
       location: Any
       path: Any
-      checksum: sha1$68c5a8f77b1063f3fbb0addd20b34b4332328c88
-      size: 1511386
+      checksum: sha1$4cff8f3da5e1487b84d7d9206dc1bdba54854133
+      size: 256490
     stderr:
       class: File
       basename: stderr.txt
       location: Any
       path: Any
-      checksum: sha1$7d8cb56e96afe8062d58021dfc9e415150e3f694
-      size: 10559
+      checksum: sha1$58cac28b782429a51dcdea296a61d4489ae3d087
+      size: 596
     stdout:
       class: File
       basename: stdout.txt
       location: Any
       path: Any
-      checksum: sha1$dcb66eb80d2449200f9360422896726306caffd8
-      size: 1060895
+      checksum: sha1$347740ecee42d2913409f4c89a7a2635cca03dc3
+      size: 160778
 
 # Ratio evalue
 - job: tools/ratio_evalue/ratio_evalue_test_input.yml
   tool: ../CWL/Tools/RatioEvalue/ratio_evalue.cwl
+  short_name: ratio_evalue.cwl
+  doc: RatioEvalue
   output:
     informative_table:
       class: File
@@ -160,14 +180,16 @@
 # VirFinder 
 - job: tools/virfinder/virfinder_test_input.yml
   tool: ../CWL/Tools/VirFinder/virfinder.cwl
+  short_name: virfinder.cwl
+  doc: VirFinder
   output:
     output:
       class: File
       basename: VirFinder_output.tsv
       location: Any
       path: Any
-      checksum: sha1$a0794a6cd15d7549b704191e21a65e1854c51e9a
-      size: 85756
+      checksum: sha1$8a81b6d8c4876c8d91d16dd82c6f2fc26e50cc41
+      size: 104
     stderr:
       class: File
       basename: stderr.txt
@@ -180,259 +202,150 @@
       basename: stdout.txt
       location: Any
       path: Any
-      size: 158366
+      size: Any
 
-# VirFinder 
+# VirSorter
 - job: tools/virsorter/virsorter_test_input.yml
   tool: ../CWL/Tools/VirSorter/virsorter.cwl
+  short_name: virsorter.cwl
+  doc: VirSorter
   output:
       predicted_viral_seq_dir:
         basename: Predicted_viral_sequences
         class: Directory
         location: Predicted_viral_sequences
         path: Predicted_viral_sequences
-        listing:
+        listing: &virsorter
           - class: File
-            size: 42882
             basename: VIRSorter_cat-1.fasta
+            checksum: Any
             location: Any
-            path: Any    
+            path: Any  
+            size: 42882
           - class: File
-            size: 159145
             basename: VIRSorter_cat-2.fasta
+            checksum: Any
+            size: 72580
             location: Any
             path: Any    
           - class: File
-            size: 0
             basename: VIRSorter_cat-3.fasta
-            location: Any
-            path: Any    
-          - class: File
-            size: 43597
-            basename: VIRSorter_prophages_cat-4.fasta
-            location: Any
-            path: Any    
-          - class: File
-            size: 38377
-            basename: VIRSorter_prophages_cat-5.fasta
-            location: Any
-            path: Any    
-          - class: File
+            checksum: sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709
             size: 0
+            location: Any
+            path: Any    
+          - class: File
+            basename: VIRSorter_prophages_cat-4.fasta
+            checksum: Any
+            size: 106400
+            location: Any
+            path: Any    
+          - class: File
+            basename: VIRSorter_prophages_cat-5.fasta
+            checksum: Any
+            size: 38377
+            location: Any
+            path: Any    
+          - class: File
             basename: VIRSorter_prophages_cat-6.fasta
-            # not used
+            checksum: sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709
+            size: 0
+            path: Any
+            location: Any
           - class: File
             basename: VIRSorter_cat-1.gb
+            checksum: Any
+            size: 100589
             location: Any
             path: Any    
           - class: File
             basename: VIRSorter_cat-2.gb
+            checksum: Any
             location: Any
-            path: Any    
+            path: Any
+            size: 182085
           - class: File
             basename: VIRSorter_cat-3.gb
+            checksum: Any
+            size: 0
             location: Any
-            path: Any    
+            path: Any
           - class: File
             basename: VIRSorter_prophages_cat-4.gb
             location: Any
-            path: Any    
+            path: Any
+            checksum: Any
+            size: 269175
           - class: File
             basename: VIRSorter_prophages_cat-5.gb
+            checksum: Any
+            size: 92828
             location: Any
             path: Any    
           - class: File
             basename: VIRSorter_prophages_cat-6.gb
+            checksum: sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709
+            size: 0
             location: Any
             path: Any    
       stderr:
         class: File
         basename: stderr.txt
+        checksum: sha1$d189933ff267892f43370dcd046e36e2375071eb
         location: Any
         path: Any
-        size: 0
+        size: 158
       stdout:
         class: File
         basename: stdout.txt
+        checksum: Any
         location: Any
         path: Any
-        size: 6321
+        size: Any
 
 ## -- Workflows -- ##
+# TODO: Too slow, enable after VirSorter fasta chunking
 # Pipeline
-- job: workflows/pipeline_test_input.yml
-  tool: ../CWL/WorkFlow/pipeline.cwl
-  output:
-      output_length_filtering:
-        class: File
-        basename: ERR575691_host_filtered_filt500bp.fasta
-        location: Any
-        path: Any
-        size: 2212936
-      output_parse_stdout:
-        class: File
-        basename: stdout.txt
-        location: Any
-        path: Any
-        size: 392
-      output_prodigal:
-        - class: File
-          basename: high_confidence_putative_viral_contigs_prodigal.faa
-          location: Any
-          path: Any
-          size: 109213
-        - class: File
-          basename: low_confidence_putative_viral_contigs_prodigal.faa
-          location: Any
-          path: Any
-          size: 1343
-        - class: File
-          basename: putative_prophages_prodigal.faa
-          location: Any
-          path: Any
-          size: 42325
-      output_final_assign:
-        - class: File
-          basename: high_confidence_putative_viral_contigs_prot_ann_table_tax_assign.tsv
-          location: Any
-          path: Any  
-          size: 468
-        - class: File
-          basename: low_confidence_putative_viral_contigs_prot_ann_table_tax_assign.tsv
-          location: Any
-          path: Any  
-          size: 128
-        - class: File
-          basename: putative_prophages_prot_ann_table_tax_assign.tsv
-          location: Any
-          path: Any  
-          size: 230
-      output_parse:
-        - class: File
-          basename: high_confidence_putative_viral_contigs.fna
-          location: Any
-          path: Any  
-          size: 205451
-        - class: File
-          basename: low_confidence_putative_viral_contigs.fna
-          location: Any
-          path: Any  
-          size: 2854
-        - class: File
-          basename: putative_prophages.fna
-          location: Any
-          path: Any  
-          size: 83317
-      output_virsorter:
-        path: Predicted_viral_sequences
-        basename: Predicted_viral_sequences
-        class: Directory
-        listing:
-          - class: File
-            basename: VIRSorter_cat-1.fasta
-            location: Any
-            path: Any  
-            size: 42882
-          - class: File
-            basename: VIRSorter_cat-2.fasta
-            location: Any
-            path: Any
-            size: 159145
-          - class: File
-            basename: VIRSorter_cat-3.fasta
-            location: Any
-            path: Any  
-            size: 0
-          - class: File
-            basename: VIRSorter_prophages_cat-4.fasta
-            location: Any
-            path: Any
-            size: 43597
-          - class: File
-            basename: VIRSorter_prophages_cat-5.fasta
-            size: 38377
-            location: Any
-            path: Any
-          - class: File
-            basename: VIRSorter_prophages_cat-6.fasta
-            size: 0
-            location: Any
-            path: Any
-            # not used
-          - class: File
-            basename: VIRSorter_cat-1.gb
-            location: Any
-            path: Any
-          - class: File
-            basename: VIRSorter_cat-2.gb
-            location: Any
-            path: Any
-          - class: File
-            basename: VIRSorter_cat-3.gb
-            location: Any
-            path: Any
-          - class: File
-            basename: VIRSorter_prophages_cat-4.gb
-            location: Any
-            path: Any
-          - class: File
-            location: Any
-            path: Any
-            basename: VIRSorter_prophages_cat-5.gb
-          - class: File
-            basename: VIRSorter_prophages_cat-6.gb
-            location: Any
-            path: Any
-      output_parse_stderr:
-        class: File
-        basename: stderr.txt
-        location: Any
-        path: Any
-        size: 0
-      output_virfinder:
-        class: File
-        basename: VirFinder_output.tsv
-        location: Any
-        path: Any
-        size: 37221
+# - job: workflows/pipeline_test_input.yml
+#   tool: ../CWL/WorkFlow/pipeline.cwl
+#   short_name: pipeline.cwl
+#   doc: "Workflow"
+#   output:
+#       output_length_filtering: *lf
+#       output_parse: *parse
+#       output_prodigal: *prodigal
+#       output_final_assign: *assign
+#       output_virsorter: *virsorter
 
 # Sub-workflow
-- job: workflows/subworkflow_test_input.yml
-  tool: ../CWL/WorkFlow/subworkflow_viral_processing.cwl
-  output:
-      prodigal_out:
-        class: File
-        basename: high_confidence_putative_viral_contigs_prodigal.faa
-        location: Any
-        path: Any
-        size: 109213
-      hmmscan_out:
-        class: File
-        basename: high_confidence_putative_viral_contigs_prodigal_hmmscan.tbl
-        location: Any
-        path: Any
-        size: 151094
-      modification_out:
-        class: File
-        basename: high_confidence_putative_viral_contigs_prodigal_hmmscan_modified.faa
-        location: Any
-        path: Any
-        size: 105441
-      annotation_table:
-        class: File
-        basename: high_confidence_putative_viral_contigs_prot_ann_table.tsv
-        location: Any
-        path: Any
-        size: 37137
-      assign_results:
-        class: File
-        basename: high_confidence_putative_viral_contigs_prot_ann_table_tax_assign.tsv
-        location: Any
-        path: Any
-        size: 468
-      ratio_evalue_table:
-        class: File
-        basename: high_confidence_putative_viral_contigs_prodigal_hmmscan_modified_informative.tsv
-        location: Any
-        path: Any
-        size: 14375
+# - job: workflows/subworkflow_test_input.yml
+#   tool: ../CWL/WorkFlow/subworkflow_viral_processing.cwl
+#   short_name: subworkflow_viral_processing.cwl
+#   doc: "Subworkflow"
+#   output:
+#       prodigal_out: *prodigal
+#       hmmscan_out: *hmmscan
+#       modification_out:
+#         class: File
+#         basename: high_confidence_putative_viral_contigs_prodigal_hmmscan_modified.faa
+#         location: Any
+#         path: Any
+#         size: 105441
+#       annotation_table:
+#         class: File
+#         basename: high_confidence_putative_viral_contigs_prot_ann_table.tsv
+#         location: Any
+#         path: Any
+#         size: 37137
+#       assign_results:
+#         class: File
+#         basename: high_confidence_putative_viral_contigs_prot_ann_table_tax_assign.tsv
+#         location: Any
+#         path: Any
+#         size: 468
+#       ratio_evalue_table:
+#         class: File
+#         basename: high_confidence_putative_viral_contigs_prodigal_hmmscan_modified_informative.tsv
+#         location: Any
+#         path: Any
+#         size: 14375

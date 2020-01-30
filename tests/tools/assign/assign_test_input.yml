@@ -1,3 +1,6 @@
 input_table:
   class: File
   path: high_confidence_putative_viral_contigs_prot_ann_table.tsv
+ncbi_tax_db:
+    class: File
+    path: ../../../databases/ete3_ncbi_tax.sqlite

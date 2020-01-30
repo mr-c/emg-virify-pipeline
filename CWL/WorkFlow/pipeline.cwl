@@ -28,7 +28,15 @@ inputs:
       ../../databases/vpHMM
     doc: |
       HMMScan Viral HMM (databases/vpHMM/vpHMM_database).
-      NOTE: it needs to be a full path.      
+      NOTE: it needs to be a full path.
+  ncbi_tax_db_file:
+    type: File
+    default:
+      ../../databases/ete3_ncbi_tax.sqlite
+    doc: |
+      ete3 NCBITaxa db https://github.com/etetoolkit/ete/blob/master/ete3/ncbi_taxonomy/ncbiquery.py
+      http://etetoolkit.org/docs/latest/tutorial/tutorial_ncbitaxonomy.html
+      This file was manually built and placed in the corresponding path (on databases)
 
 outputs:
   output_length_filtering:
@@ -101,8 +109,10 @@ steps:
   subworkflow_for_each_fasta:
     in:
       fasta_file: parse_pred_contigs/output_fastas  # array
+      # DBs
       hmms_serialized_file: hmms_serialized_file
       hmmscan_database: hmmscan_database_directory
+      ncbi_tax_db_file: ncbi_tax_db_file
     out:
       - prodigal_out
       - hmmscan_out

@@ -1,5 +1,7 @@
 # CWL viral pipeline
 
+[![Build Status](https://travis-ci.org/EBI-Metagenomics/CWL_viral_pipeline.svg?branch=eval-non-dockerized)](https://travis-ci.org/EBI-Metagenomics/CWL_viral_pipeline)
+
 CWL implementation of the MGnify viral pipeline.
 
 ## Setup

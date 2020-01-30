@@ -20,6 +20,14 @@ inputs:
     doc: |
       HMMScan Viral HMM (databases/vpHMM/vpHMM_database).
       NOTE: it needs to be a full path.
+  ncbi_tax_db_file:
+    type: File
+    default:
+      ../../databases/ete3_ncbi_tax.sqlite
+    doc: |
+      ete3 NCBITaxa db https://github.com/etetoolkit/ete/blob/master/ete3/ncbi_taxonomy/ncbiquery.py
+      http://etetoolkit.org/docs/latest/tutorial/tutorial_ncbitaxonomy.html
+      This file was manually built and placed in the corresponding path (on databases)
 
 outputs:
   prodigal_out:
@@ -85,6 +93,7 @@ steps:
   assign:
     in:
       input_table: annotation/annotation_table
+      ncbi_tax_db: ncbi_tax_db_file
     out:
       - assign_table
     run: ../Tools/Assign/assign.cwl
