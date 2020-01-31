@@ -303,6 +303,21 @@
         path: Any
         size: Any
 
+# Krona
+- job: tools/krona/krona_test_input.yml
+  tool: ../CWL/Tools/Krona/krona_workflow.cwl
+  short_name: krona.cwl
+  doc: Krona subworkflow
+  output:
+    krona_html:
+      class: File
+      basename: "krona.html"
+      location: Any
+      checksum: Any
+      size: 226967
+      format: "https://www.iana.org/assignments/media-types/text/html"
+      path: Any
+
 ## -- Workflows -- ##
 # TODO: Too slow, enable after VirSorter fasta chunking
 # Pipeline

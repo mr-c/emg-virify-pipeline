@@ -1,0 +1,1 @@
+/home/mbc/projects/cwl_viral_pipeline/CWL/Tools/Krona/generate_counts_table.py
