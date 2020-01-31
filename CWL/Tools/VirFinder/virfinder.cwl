@@ -36,6 +36,5 @@ outputs:
     outputBinding:
       glob: VirFinder_output.tsv
 
-
 doc: |
   usage: Rscript run_virfinder.Rscript <input.fasta> <output.tsv>

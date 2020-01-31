@@ -41,6 +41,7 @@ inputs:
       prefix: "--wdir"
   number_of_cpu:
     type: int?
+    default: 8
     inputBinding:
       separate: true
       prefix: "--ncpu"
