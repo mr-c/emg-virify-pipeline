@@ -24,6 +24,7 @@ script:
 
 cache:
   directories:
-    - $TRAVIS_BUILD_DIR/databases
+    - databases/vpHMM_database
+    - databases/virsorter-data
     # TODO: If the env changes then the cache has to be manually cleaned
     # - $HOME/miniconda
