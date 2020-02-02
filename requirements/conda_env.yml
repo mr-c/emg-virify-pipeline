@@ -298,6 +298,7 @@ dependencies:
   - perl-yaml=1.27=pl526_0
   - pip=19.3.1=py37_0
   - pixman=0.38.0=h516909a_1003
+  - prodigal=2.6.3=h516909a_2
   - python=3.7.2=h0371630_0
   - r-assertthat=0.2.1=r36h6115d3f_0
   - r-base=3.6.1=h9bb98a2_1

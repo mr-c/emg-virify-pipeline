@@ -95,19 +95,19 @@
         basename: high_confidence_putative_viral_contigs.fna
         location: Any
         path: Any
-        checksum: sha1$a9e13ac2cbcf79c01fe3d69d157e29fcec7585c3
+        checksum: Any #sha1$a9e13ac2cbcf79c01fe3d69d157e29fcec7585c3
         size: 205451
       - class: File
         basename: low_confidence_putative_viral_contigs.fna
         location: Any
         path: Any
-        checksum: sha1$f3a54007ca77eb5f3c6d3d44703a7259e8a5e371
+        checksum: Any # sha1$f3a54007ca77eb5f3c6d3d44703a7259e8a5e371
         size: 7383
       - class: File
         basename: putative_prophages.fna
         location: Any
         path: Any
-        checksum: sha1$3921383191e46a9de9c77b4b77e1bbef7f14c274
+        checksum: Any # sha1$3921383191e46a9de9c77b4b77e1bbef7f14c274
         size: 83317
     stderr:
       basename: stderr.txt
@@ -119,7 +119,7 @@
       basename: stdout.txt
       location: Any
       path: Any
-      checksum: sha1$0ff7927e1fd19f0fa88f9f3921fa1ec1c8d2a2da
+      checksum: Any # sha1$0ff7927e1fd19f0fa88f9f3921fa1ec1c8d2a2da
       size: 506
 
 # Prodigal

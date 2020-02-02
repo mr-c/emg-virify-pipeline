@@ -1,9 +1,9 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
-hints:
-  DockerRequirement:
-    dockerPull: mhoelzer/sed_docker:0.1
+#hints:
+#  DockerRequirement:
+#    dockerPull: mhoelzer/sed_docker:0.1
 
 baseCommand: ['sed', '/^#/d; s/ \+/\t/g']
 
