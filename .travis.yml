@@ -22,7 +22,7 @@ script:
   - cd $TRAVIS_BUILD_DIR/tests
   # TODO:
   # run only tests that do not require DBs or files from the FTP server
-  - cwltest --test tests.yml --tool cwltool -j 12 --verbose -n 1,4,5,6,7,8,9,11
+  - cwltest --test tests.yml --tool cwltool -j 12 --verbose -n 1,4,5,6,7,9,11
 
 cache:
   directories:
