@@ -1,6 +1,6 @@
 # CWL viral pipeline
 
-[![Build Status](https://travis-ci.org/EBI-Metagenomics/CWL_viral_pipeline.svg?branch=dev)](https://travis-ci.org/EBI-Metagenomics/CWL_viral_pipeline)
+[![Build Status](https://api.travis-ci.org/EBI-Metagenomics/emg-viral-pipeline.svg?branch=dev)](https://travis-ci.org/EBI-Metagenomics/emg-viral-pipeline)
 
 CWL implementation of the MGnify viral pipeline.
 
@@ -160,8 +160,10 @@ Script generates tabular file with taxonomic assignment of viral contigs based o
           Parsing virus files
                    |
                    |
-                Prodigal             -- S
-                   |    \               u
+                Prodigal             ----
+                   |    |               |    
+                   |    |               S
+                   |    |               u
                HMMscan   \              b
                    |      \             W
             Modification   |            o
@@ -170,8 +172,10 @@ Script generates tabular file with taxonomic assignment of viral contigs based o
                   Annotation            F
                      |                  l
                      |                  o
-                  Assign             -- w
-                                              
+                  Assign                w
+                     |                  |
+                     |                  |
+                   Krona             ---|
 ```
 
 # Tests
