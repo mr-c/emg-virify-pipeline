@@ -12,9 +12,9 @@ label: "VirFinder is a method for finding viral contigs from de novo assemblies.
 requirements:
   InlineJavascriptRequirement: {}
 
-baseCommand: [run_virfinder.Rscript]
+baseCommand: "run_virfinder.Rscript"
 arguments:
-  - valueFrom: VirFinder_output.tsv
+  - valueFrom: virfinder_output.tsv
     position: 2
 
 inputs:
@@ -28,13 +28,10 @@ stdout: stdout.txt
 stderr: stderr.txt
 
 outputs:
-  stdout: stdout
-  stderr: stderr
-
-  output:
+  virfinder_output:
     type: File
     outputBinding:
-      glob: VirFinder_output.tsv
+      glob: virfinder_output.tsv
 
 doc: |
-  usage: Rscript run_virfinder.Rscript <input.fasta> <output.tsv>
+  "usage: Rscript run_virfinder.Rscript <input.fasta> <output.tsv>"

@@ -45,13 +45,18 @@ outputs:
   stdout: stdout
   stderr: stderr
 
-  output_fastas:
-    type:
-      type: array
-      items: File
+  high_confidence_contigs:
+    type: File
     outputBinding:
-      glob: "*.fna"
-
+      glob: "high_confidence_putative_viral_contigs.fna"
+  low_confidence_contigs:
+    type: File
+    outputBinding:
+      glob: "low_confidence_putative_viral_contigs.fna"
+  prophages_contigs:
+    type: File
+    outputBinding:
+      glob: "putative_prophages.fna"
 
 doc: |
   usage: parse_viral_pred.py [-h] -a ASSEMB -f FINDER -s SORTER [-o OUTDIR]

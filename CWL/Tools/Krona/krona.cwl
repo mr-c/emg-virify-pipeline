@@ -9,6 +9,7 @@ label: visualize using krona
 #    dockerPull: kronav2.7.1:1.0
 
 requirements:
+  InlineJavascriptRequirement: {}
   ResourceRequirement:
     ramMin: 200
     coresMin: 2
@@ -23,8 +24,8 @@ inputs:
 baseCommand: ktImportText
 
 arguments:
-  - valueFrom: "krona.html"
-    prefix: -o
+  - "-o"
+  - $( inputs.otu_counts.nameroot + "_krona.html" )
 
 outputs:
   krona_html:

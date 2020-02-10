@@ -1,4 +1,3 @@
-#!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: CommandLineTool
 
@@ -11,33 +10,33 @@ label: "Biosequence analysis using profile hidden Markov models"
 requirements:
   InlineJavascriptRequirement: {}
 
-baseCommand: ["hmmscan"]
+baseCommand: ["hmmscan_wrapper.sh"]
 
-outputs:
-  output_table:
+inputs:
+  database:
+    type: Directory
+  aa_fasta_file:
     type: File
-    outputBinding:
-      glob: "*hmmscan.tbl"
+    inputBinding:
+      position: 5
+      separate: true
 
 arguments:
   - prefix: -E
     valueFrom: "0.001"
     position: 2
   - prefix: --domtblout
-    valueFrom: $(inputs.seqfile.nameroot)_hmmscan.tbl
+    valueFrom: $(inputs.aa_fasta_file.nameroot)_hmmscan.tbl
     position: 3
   - valueFrom: $(inputs.database.path)/vpHMM_database
     position: 4
   - valueFrom: --noali
     position: 1
 
-inputs:
-  database:
-    type: Directory
-  seqfile:
+outputs:
+  output_table:
     type: File
-    inputBinding:
-      position: 5
-      separate: true
+    outputBinding:
+      glob: "*hmmscan.tbl"
 
 stdout: stdout.txt

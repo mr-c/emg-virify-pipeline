@@ -1,3 +1,5 @@
-assign_table:
-  class: File
-  path: high_confidence_putative_viral_contigs_prot_ann_table_tax_assign.tsv
+assign_tables:
+  - class: File
+    path: high_conf_pvcp_tax_assign_1.tsv
+  - class: File
+    path: high_conf_pvcp_tax_assign_2.tsv    

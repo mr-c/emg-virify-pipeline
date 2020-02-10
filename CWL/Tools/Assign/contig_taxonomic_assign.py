@@ -136,5 +136,6 @@ if __name__ == "__main__":
         input_df = pd.read_csv(args.input_file, sep="\t")
         output_df = contig_tax(input_df, args.ncbi_db, args.min_prot,
                                args.prot_prop, args.tax_thres)
-        output_df.to_csv(os.path.join(args.outdir, re.split(
-            r"\.[a-z]+$", os.path.basename(args.input_file))[0] + "_tax_assign.tsv"), sep="\t", index=False)
+        print(args.input_file)
+        out_file = re.split(r"\.[a-z]+$", os.path.basename(args.input_file))[0]
+        output_df.to_csv(os.path.join(args.outdir, out_file + "_tax_assign.tsv"), sep="\t", index=False)

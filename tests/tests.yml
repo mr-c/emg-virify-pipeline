@@ -1,56 +1,62 @@
 
 # Annotation
 - job: tools/annotation/viral_annotation_input.yml
-  tool: ../CWL/Tools/Annotation/viral_annotation.cwl
-  short_name: viral_annotation.cwl
+  tool: ../CWL/Tools/Annotation/viral_annotation_swf.cwl
+  short_name: viral_annotation_swf.cwl
   doc: "Viral annotation"
   output:
-    annotation_table:
-      class: File
-      basename: high_confidence_putative_viral_contigs_prot_ann_table.tsv
-      checksum: sha1$e7b28fdae52358fc900616156587212878d4c1e5
-      location: Any
-      path: Any
-      size: 1568
+    annotation_tables:
+      - class: File
+        basename: high_confidence_putative_viral_contigs_prodigal_prot_ann_table.tsv
+        checksum: sha1$e7b28fdae52358fc900616156587212878d4c1e5
+        location: Any
+        path: Any
+        size: 1568
+      - class: File
+        basename: low_confidence_putative_viral_contigs_prodigal_prot_ann_table.tsv
+        checksum: sha1$e7b28fdae52358fc900616156587212878d4c1e5
+        location: Any
+        path: Any
+        size: 1568
+      - class: File
+        basename: putative_prophages_prodigal_prot_ann_table.tsv
+        checksum: sha1$e7b28fdae52358fc900616156587212878d4c1e5
+        location: Any
+        path: Any
+        size: 1568
+
 
 # Assign
 - job: tools/assign/assign_test_input.yml
-  tool: ../CWL/Tools/Assign/assign.cwl
-  short_name: assign.cwl
+  tool: ../CWL/Tools/Assign/assign_swf.cwl
+  short_name: assign_swf.cwl
   doc: "Assign"
   output: &assign
-    assign_table:
-      class: File
-      basename: high_confidence_putative_viral_contigs_prot_ann_table_tax_assign.tsv
-      # doesn't guarantee order.
-      checksum: Any
-      location: Any
-      path: Any
-      size: 554
-    stderr:
-      class: File
-      basename: stderr.txt
-      checksum: sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709
-      location: Any
-      path: Any
-      size: 0
-    stdout:
-      class: File
-      basename: stdout.txt
-      checksum: sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709
-      location: Any
-      path: Any
-      size: 0
+    assign_tables:
+      - class: File
+        basename: high_confidence_putative_viral_contigs_prodigal_prot_ann_table_tax_assign.tsv
+        # doesn't guarantee order.
+        checksum: Any
+        location: Any
+        path: Any
+        size: 554
+      - class: File
+        basename: low_confidence_putative_viral_contigs_prodigal_prot_ann_table_tax_assign.tsv
+        # doesn't guarantee order.
+        checksum: Any
+        location: Any
+        path: Any
+        size: 425
 
 # HMMScan
 - job: tools/hmmscan/hmmscan_test_input.yml
-  tool: ../CWL/Tools/HMMScan/hmmscan.cwl
-  short_name: hmmscan.cwl
+  tool: ../CWL/Tools/HMMScan/hmmscan_swf.cwl
+  short_name: hmmscan_swf.cwl
   doc: "HMMScan"
   output:
     output_table: &hmmscan
-      class: File
-      basename: high_confidence_putative_viral_contigs_prodigal_hmmscan.tbl
+      class: File 
+      basename: hmmer_table.tsv
       checksum: Any
       location: Any
       path: Any
@@ -91,36 +97,30 @@
   doc: Parse viral predictions
   output: &parse
     output_fastas:
-      - class: File
-        basename: high_confidence_putative_viral_contigs.fna
-        location: Any
-        path: Any
-        checksum: Any #sha1$a9e13ac2cbcf79c01fe3d69d157e29fcec7585c3
-        size: 205451
-      - class: File
-        basename: low_confidence_putative_viral_contigs.fna
-        location: Any
-        path: Any
-        checksum: Any # sha1$f3a54007ca77eb5f3c6d3d44703a7259e8a5e371
-        size: 7383
-      - class: File
-        basename: putative_prophages.fna
-        location: Any
-        path: Any
-        checksum: Any # sha1$3921383191e46a9de9c77b4b77e1bbef7f14c274
-        size: 83317
-    stderr:
-      basename: stderr.txt
-      checksum: sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709
-      class: File
-      size: 0
-    stdout:
-      class: File
-      basename: stdout.txt
-      location: Any
-      path: Any
-      checksum: Any # sha1$0ff7927e1fd19f0fa88f9f3921fa1ec1c8d2a2da
-      size: 506
+      high_confidence_contigs: None
+      prophages_contigs: None
+      low_confidence_contigs:
+          basename: low_confidence_putative_viral_contigs.fna
+          checksum: Any
+          class: File
+          location: Any
+          path: Any
+          size: 124813
+      stderr:
+          basename: stderr.txt
+          checksum: Any
+          class: File
+          location: Any
+          path: Any
+          size: 0
+      stdout:
+          basename: stdout.txt
+          checksum: Any
+          class: File
+          location: Any
+          path: Any
+          size: 102
+      
 
 # Prodigal
 - job: tools/prodigal/prodigal_test_input.yml
@@ -183,26 +183,13 @@
   short_name: virfinder.cwl
   doc: VirFinder
   output:
-    output:
+    virfinder_output0:
       class: File
-      basename: VirFinder_output.tsv
+      basename: virfinder_output.tsv
       location: Any
       path: Any
       checksum: sha1$8a81b6d8c4876c8d91d16dd82c6f2fc26e50cc41
       size: 104
-    stderr:
-      class: File
-      basename: stderr.txt
-      path: Any
-      location: Any
-      checksum: sha1$db98a2554511002f44584227c08375de2643e15d
-      size: 1938
-    stdout:
-      class: File
-      basename: stdout.txt
-      location: Any
-      path: Any
-      size: Any
 
 # VirSorter
 - job: tools/virsorter/virsorter_test_input.yml
@@ -305,32 +292,48 @@
 
 # Krona
 - job: tools/krona/krona_test_input.yml
-  tool: ../CWL/Tools/Krona/krona_workflow.cwl
+  tool: ../CWL/Tools/Krona/krona_swf.cwl
   short_name: krona.cwl
   doc: Krona subworkflow
   output:
     krona_html:
-      class: File
-      basename: "krona.html"
-      location: Any
-      checksum: Any
-      size: 226967
-      format: "https://www.iana.org/assignments/media-types/text/html"
-      path: Any
+      - class: File
+        basename: "high_conf_pvcp_tax_assign_1_tax_counts_krona.html"
+        location: Any
+        checksum: Any
+        size: 227076
+        format: "https://www.iana.org/assignments/media-types/text/html"
+        path: Any
+      - class: File
+        basename: "high_conf_pvcp_tax_assign_2_tax_counts_krona.html"
+        location: Any
+        checksum: Any
+        size: 227328
+        format: "https://www.iana.org/assignments/media-types/text/html"
+        path: Any
+
 
 ## -- Workflows -- ##
 # TODO: Too slow, enable after VirSorter fasta chunking
 # Pipeline
-# - job: workflows/pipeline_test_input.yml
-#   tool: ../CWL/WorkFlow/pipeline.cwl
-#   short_name: pipeline.cwl
-#   doc: "Workflow"
-#   output:
-#       output_length_filtering: *lf
-#       output_parse: *parse
-#       output_prodigal: *prodigal
-#       output_final_assign: *assign
-#       output_virsorter: *virsorter
+- job: workflows/pipeline_test_input.yml
+  tool: ../CWL/WorkFlow/pipeline.cwl
+  short_name: pipeline.cwl
+  doc: "Workflow"
+  output:
+      output_length_filtering: *lf
+      output_parse: *parse
+      output_prodigal: *prodigal
+      output_final_assign: *assign
+      output_virsorter: *virsorter
+      output_krona_html:
+        class: File
+        basename: "krona.html"
+        location: Any
+        checksum: Any
+        size: 226967
+        format: "https://www.iana.org/assignments/media-types/text/html"
+        path: Any
 
 # Sub-workflow
 # - job: workflows/subworkflow_test_input.yml

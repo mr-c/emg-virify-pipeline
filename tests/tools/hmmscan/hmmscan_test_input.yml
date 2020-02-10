@@ -1,6 +1,8 @@
-seqfile:
-  class: File
-  path: high_confidence_putative_viral_contigs_prodigal.faa
+aa_fasta_files:
+  - class: File
+    path: high_confidence_putative_viral_contigs_prodigal.faa
+  - class: File
+    path: low_confidence_putative_viral_contigs_prodigal.faa  
 database:
   class: Directory
   path: ../../../databases/vpHMM

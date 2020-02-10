@@ -1,37 +1,33 @@
 cwlVersion: v1.0
-class: CommandLineTool
+class: Workflow
 
 label: "Viral contig assign"
 
-#hints:
-#  DockerRequirement:
-#    dockerPull: mhoelzer/assign_taxonomy:0.1
-
 requirements:
   InlineJavascriptRequirement: {}
-
-baseCommand: 'contig_taxonomic_assign.py'
+  ScatterFeatureRequirement: {}
 
 inputs:
-  input_table:
-    type: File
-    inputBinding:
-      separate: true
-      prefix: "-i"
+  input_tables:
+    type: File[]
   ncbi_tax_db:
     type: File
-    inputBinding:
-      prefix: "-d"
     doc: |
       "ete3 NCBITaxa db https://github.com/etetoolkit/ete/blob/master/ete3/ncbi_taxonomy/ncbiquery.py
       http://etetoolkit.org/docs/latest/tutorial/tutorial_ncbitaxonomy.html
       This file was manually built and placed in the corresponding path (on databases)"
 
-stdout: stdout.txt
-stderr: stderr.txt
+steps:
+  viral_assignation:
+    run: assign.cwl
+    scatter: input_table
+    in:
+      input_table: input_tables
+      ncbi_tax_db: ncbi_tax_db
+    out:
+      - assign_table
 
 outputs:
-  assign_table:
-    type: File
-    outputBinding:
-      glob: "*tax_assign.tsv"
+  assign_tables:
+    outputSource: viral_assignation/assign_table
+    type: File[]

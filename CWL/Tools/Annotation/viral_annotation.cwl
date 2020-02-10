@@ -1,4 +1,3 @@
-#!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: CommandLineTool
 
@@ -11,7 +10,7 @@ label: "Viral contig annotation"
 requirements:
   InlineJavascriptRequirement: {}
 
-baseCommand: ['viral_contigs_annotation.py']
+baseCommand: "viral_contigs_annotation.py"
 arguments: ["-o", $(runtime.outdir)]
 
 inputs:
@@ -25,11 +24,6 @@ inputs:
     inputBinding:
       separate: true
       prefix: "-t"
-  input_fna:
-    type: File
-    inputBinding:
-      separate: true
-      prefix: "-n"
 
 outputs:
   annotation_table:

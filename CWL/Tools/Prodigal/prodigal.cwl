@@ -11,11 +11,6 @@ requirements:
   InlineJavascriptRequirement: {}
 
 baseCommand: [prodigal]
-arguments:
-  - prefix: -p
-    valueFrom: "meta"
-  - prefix: -a
-    valueFrom: $(inputs.input_fasta.nameroot)_prodigal.faa
 
 inputs:
   input_fasta:
@@ -23,6 +18,12 @@ inputs:
     inputBinding:
       separate: true
       prefix: "-i"
+
+arguments:
+  - prefix: -p
+    valueFrom: "meta"
+  - prefix: -a
+    valueFrom: $(inputs.input_fasta.nameroot)_prodigal.faa
 
 stdout: stdout.txt
 stderr: stderr.txt
@@ -35,4 +36,3 @@ outputs:
     type: File
     outputBinding:
       glob: "*_prodigal.faa"
-

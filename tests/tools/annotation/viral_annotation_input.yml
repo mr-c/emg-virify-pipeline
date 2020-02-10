@@ -1,9 +1,10 @@
-input_fasta:
-  class: File
-  path: viral_CDS.faa
-input_table:
+input_fastas:
+  - class: File
+    path: high_confidence_putative_viral_contigs_prodigal.faa
+  - class: File
+    path: low_confidence_putative_viral_contigs_prodigal.faa
+  - class: File
+    path: putative_prophages_prodigal.faa
+hmmer_table:
   class: File
   path: hmmer_ViPhOG_modified_informative.tsv
-input_fna:
-  class: File
-  path: high_confidence_putative_viral_contigs.fna
