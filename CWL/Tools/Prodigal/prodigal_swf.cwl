@@ -1,18 +1,22 @@
 cwlVersion: v1.0
 class: Workflow
 
-label: "Prodigal subworkflow of the viral pipeline"
+label: "Prodigal"
+
+doc: |
+  SubWorkflow for prodigal.
+  Protein-coding gene prediction for prokaryotic genomes.
 
 requirements:
   InlineJavascriptRequirement: {}
 
 inputs:
   high_confidence_contigs:
-    type: File
+    type: File?
   low_confidence_contigs:
-    type: File
+    type: File?
   prophages_contigs:
-    type: File
+    type: File?
 
 steps:
   high_confidence_prodigal:
@@ -37,10 +41,10 @@ steps:
 outputs:
   high_confidence_contigs_genes:
     outputSource: high_confidence_prodigal/output_fasta
-    type: File
+    type: File?
   low_confidence_contigs_genes:
     outputSource: low_confidence_prodigal/output_fasta
-    type: File
+    type: File?
   prophages_contigs_genes:
     outputSource: prophages_prodigal/output_fasta
-    type: File
+    type: File?

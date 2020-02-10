@@ -1,7 +1,7 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
-label: visualize using krona
+label: "Krona"
 
 #edited from ebi-metagenomics-cwl/tools/krona.cwl
 #hints:

@@ -1,7 +1,7 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
-label: "VirFinder is a method for finding viral contigs from de novo assemblies."
+label: "VirFinder"
 
 # Output of this tool is saved to file <VirFinder_output.tsv>
 
@@ -34,4 +34,5 @@ outputs:
       glob: virfinder_output.tsv
 
 doc: |
-  "usage: Rscript run_virfinder.Rscript <input.fasta> <output.tsv>"
+  "VirFinder is a method for finding viral contigs from de novo assemblies.
+  usage: Rscript run_virfinder.Rscript <input.fasta> <output.tsv>"

@@ -1,0 +1,3 @@
+[submodule "emg-virify-scripts"]
+	path = emg-virify-scripts
+	url = https://github.com/EBI-Metagenomics/emg-virify-scripts

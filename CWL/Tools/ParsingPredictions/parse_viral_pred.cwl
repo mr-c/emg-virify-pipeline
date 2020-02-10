@@ -1,7 +1,7 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
-label: "Parsing viral predicted files"
+label: "Parse predictions"
 
 #hints:
 #  DockerRequirement:
@@ -46,15 +46,15 @@ outputs:
   stderr: stderr
 
   high_confidence_contigs:
-    type: File
+    type: File?
     outputBinding:
       glob: "high_confidence_putative_viral_contigs.fna"
   low_confidence_contigs:
-    type: File
+    type: File?
     outputBinding:
       glob: "low_confidence_putative_viral_contigs.fna"
   prophages_contigs:
-    type: File
+    type: File?
     outputBinding:
       glob: "putative_prophages.fna"
 

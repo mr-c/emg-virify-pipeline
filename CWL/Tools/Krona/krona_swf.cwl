@@ -1,7 +1,7 @@
 cwlVersion: v1.0
 class: Workflow
 
-label: visualize using krona
+label: "Krona"
 
 requirements:
   ScatterFeatureRequirement: {}

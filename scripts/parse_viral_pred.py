@@ -1,1 +1,0 @@
-../CWL/Tools/ParsingPredictions/parse_viral_pred.py

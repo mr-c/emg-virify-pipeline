@@ -10,14 +10,15 @@ label: "Protein-coding gene prediction for prokaryotic genomes"
 requirements:
   InlineJavascriptRequirement: {}
 
-baseCommand: [prodigal]
+baseCommand: [prodigal_wrapper.sh]
 
 inputs:
   input_fasta:
-    type: File
+    type: File?
     inputBinding:
       separate: true
       prefix: "-i"
+      position: 1 # needed for wrapper
 
 arguments:
   - prefix: -p

@@ -1,1 +1,0 @@
-../CWL/Tools/HMMScan/hmmscan_wrapper.sh

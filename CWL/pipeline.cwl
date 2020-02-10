@@ -17,35 +17,37 @@ inputs:
     default:
       class: Directory
       path: ../../databases/virsorter-data
+    doc: |
+    VirSorter supporting database files.
   hmms_serialized_file:
     type: File
     default:
       class: File
       path: ../../databases/vphmm_2020-01-29.pickle
     doc: |
-      "See Tools/RatioEvalue/ratio_evalue.cwl > hmms_serialized parameter
-      Current version /databases/vphmm_2020-01-29.pickle."
+      See Tools/RatioEvalue/ratio_evalue.cwl > hmms_serialized parameter
+      Current version /databases/vphmm_2020-01-29.pickle.
   hmmscan_database_directory:
     type: Directory
     default:
       class: Directory
       path: ../../databases/vpHMM
     doc: |
-      "HMMScan Viral HMM (databases/vpHMM/vpHMM_database).
-      NOTE: it needs to be a full path."
+      HMMScan Viral HMM (databases/vpHMM/vpHMM_database).
+      NOTE: it needs to be a full path.
   ncbi_tax_db_file:
     type: File
     default:
       class: File
       path: ../../databases/ete3_ncbi_tax.sqlite
     doc: |
-      "ete3 NCBITaxa db https://github.com/etetoolkit/ete/blob/master/ete3/ncbi_taxonomy/ncbiquery.py
+      ete3 NCBITaxa db https://github.com/etetoolkit/ete/blob/master/ete3/ncbi_taxonomy/ncbiquery.py
       http://etetoolkit.org/docs/latest/tutorial/tutorial_ncbitaxonomy.html
-      This file was manually built and placed in the corresponding path (on databases)"
+      This file was manually built and placed in the corresponding path (on databases)
 
 steps:
   length_filter:
-    label: "len filter the contigs files"
+    label: Filter contigs by length
     run: ../Tools/LengthFiltering/length_filtering.cwl
     in:
       fasta_file: input_fasta_file
@@ -53,7 +55,7 @@ steps:
       - filtered_contigs_fasta
 
   virfinder:
-    label: "VirFinder: R package for identifying viral sequences from metagenomic data using sequence signatures"
+    label: VirFinder: R package for identifying viral sequences from metagenomic data using sequence signatures
     run: ../Tools/VirFinder/virfinder.cwl
     in:
       fasta_file: length_filter/filtered_contigs_fasta
@@ -61,7 +63,7 @@ steps:
       - virfinder_output
 
   virsorter:
-    label: "VirSorter: mining viral signal from microbial genomic data"
+    label: VirSorter: mining viral signal from microbial genomic data
     run: ../Tools/VirSorter/virsorter.cwl
     in:
       fasta_file: length_filter/filtered_contigs_fasta
@@ -81,7 +83,7 @@ steps:
       - prophages_contigs
 
   prodigal:
-    label: "Protein-coding gene prediction for prokaryotic genomes"
+    label: Protein-coding gene prediction for prokaryotic genomes
     run: ../Tools/Prodigal/prodigal_swf.cwl
     in:
       high_confidence_contigs: parse_pred_contigs/high_confidence_contigs
@@ -106,17 +108,10 @@ steps:
       # single concatenated table
       - output_table
 
-  hmm_postprocessing:
-    run: ../Tools/Modification/processing_hmm_result.cwl
-    in:
-      input_table: hmmscan/output_table
-    out:
-      - modified_file
-
   ratio_evalue:
     run: ../Tools/RatioEvalue/ratio_evalue.cwl
     in:
-      input_table: hmm_postprocessing/modified_file
+      input_table: hmmscan/output_table
       hmms_serialized: hmms_serialized_file
     out:
       - informative_table
@@ -130,7 +125,6 @@ steps:
           - prodigal/low_confidence_contigs_genes
           - prodigal/prophages_contigs_genes
         linkMerge: merge_flattened
-      # TODO: check input_table: ratio_evalue/informative_table
       hmmer_table: ratio_evalue/informative_table
     out:
       - annotation_tables
@@ -151,39 +145,39 @@ steps:
       - krona_html
 
 outputs:
-  output_length_filtering:
+  filtered_contigs:
     outputSource: length_filter/filtered_contigs_fasta
     type: File
-  output_virfinder:
+  virfinder:
     outputSource: virfinder/virfinder_output
     type: File
-  output_virsorter:
+  virsorter:
     outputSource: virsorter/predicted_viral_seq_dir
     type: Directory
-  output_parse_high_confidence_contigs:
+  high_confidence_contigs:
     outputSource: parse_pred_contigs/high_confidence_contigs
     type: File
-  output_parse_low_confidence_contigs:
+  low_confidence_contigs:
     outputSource: parse_pred_contigs/low_confidence_contigs
     type: File
-  output_parse_prophages_contigs:
+  parse_prophages_contigs:
     outputSource: parse_pred_contigs/prophages_contigs
     type: File
-  output_prodigal_high_confidence:
+  high_confidence_faa:
     outputSource: prodigal/high_confidence_contigs_genes
     type: File
-  output_prodigal_low_confidence:
+  low_confidence_faa:
     outputSource: prodigal/low_confidence_contigs_genes
     type: File
-  output_prodigal_prophages:
+  prophages_faa:
     outputSource: prodigal/prophages_contigs_genes
     type: File
-  output_final_assign:
+  taxonomy_assignations:
     outputSource: assign/assign_tables
     type:
       type: array
       items: File
-  output_krona_htmls:
+  krona_plots:
     outputSource: krona/krona_html
     type:
       type: array

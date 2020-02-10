@@ -106,3 +106,6 @@ venv.bak/
 .mypy_cache/
 
 databases/*
+
+# LOCAL
+TEST_LOCAL/
