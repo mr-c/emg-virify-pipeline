@@ -1,6 +1,11 @@
 language: python
 python: 3.7
 
+# Use sed to replace the SSH URL with the public URL, then initialize submodules
+before_install:
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive
+
 install:
   # VirSorter DB (this is cached)
   # - bash travis/download_databases.sh $TRAVIS_BUILD_DIR/databases
@@ -15,14 +20,14 @@ install:
   - conda env create -f requirements/conda_env.yml
   - conda activate viral_pipeline
   # Env variables
-  - chmod +x $TRAVIS_BUILD_DIR/scripts/*
-  - export PATH=$TRAVIS_BUILD_DIR/scripts:$PATH
+  - chmod +x $TRAVIS_BUILD_DIR/emg-virify-scripts/virify_scripts/*
+  - export PATH=$TRAVIS_BUILD_DIR/emg-virify-scripts/virify_scripts:$PATH
 
 script:
   - cd $TRAVIS_BUILD_DIR/tests
   # TODO:
   # run only tests that do not require DBs or files from the FTP server
-  - cwltest --test tests.yml --tool cwltool -j 12 --verbose -n 1,4,5,6,7,9,11
+  - cwltest --test tests.yml --tool cwltool -j 12 --verbose -n 1,4,5,6,7,10
 
 cache:
   directories:
@@ -30,3 +35,7 @@ cache:
     - databases/virsorter-data
     # TODO: If the env changes then the cache has to be manually cleaned
     # - $HOME/miniconda
+
+git:
+  # manually handling submodules
+  submodules: false
