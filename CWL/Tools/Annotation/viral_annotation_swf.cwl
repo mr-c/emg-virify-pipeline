@@ -1,7 +1,7 @@
 cwlVersion: v1.0
 class: Workflow
 
-label: "Hmmer sub workflow of the viral pipeline"
+label: "ViPhOG annotations"
 
 requirements:
   InlineJavascriptRequirement: {}
