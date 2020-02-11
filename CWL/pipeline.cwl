@@ -18,7 +18,7 @@ inputs:
       class: Directory
       path: ../../databases/virsorter-data
     doc: |
-    VirSorter supporting database files.
+      VirSorter supporting database files.
   hmms_serialized_file:
     type: File
     default:
@@ -47,24 +47,24 @@ inputs:
 
 steps:
   length_filter:
-    label: Filter contigs by length
-    run: ../Tools/LengthFiltering/length_filtering.cwl
+    label: Filter contigs
+    run: ./Tools/LengthFiltering/length_filtering.cwl
     in:
       fasta_file: input_fasta_file
     out:
       - filtered_contigs_fasta
 
   virfinder:
-    label: VirFinder: R package for identifying viral sequences from metagenomic data using sequence signatures
-    run: ../Tools/VirFinder/virfinder.cwl
+    label: VirFinder
+    run: ./Tools/VirFinder/virfinder.cwl
     in:
       fasta_file: length_filter/filtered_contigs_fasta
     out:
       - virfinder_output
 
   virsorter:
-    label: VirSorter: mining viral signal from microbial genomic data
-    run: ../Tools/VirSorter/virsorter.cwl
+    label: VirSorter
+    run: ./Tools/VirSorter/virsorter.cwl
     in:
       fasta_file: length_filter/filtered_contigs_fasta
       data_dir: virsorter_data_dir
@@ -72,7 +72,8 @@ steps:
       - predicted_viral_seq_dir
 
   parse_pred_contigs:
-    run: ../Tools/ParsingPredictions/parse_viral_pred.cwl
+    label: Combine
+    run: ./Tools/ParsingPredictions/parse_viral_pred.cwl
     in:
       assembly: length_filter/filtered_contigs_fasta
       virfinder_tsv: virfinder/virfinder_output
@@ -83,8 +84,8 @@ steps:
       - prophages_contigs
 
   prodigal:
-    label: Protein-coding gene prediction for prokaryotic genomes
-    run: ../Tools/Prodigal/prodigal_swf.cwl
+    label: Prodigal
+    run: ./Tools/Prodigal/prodigal_swf.cwl
     in:
       high_confidence_contigs: parse_pred_contigs/high_confidence_contigs
       low_confidence_contigs: parse_pred_contigs/low_confidence_contigs
@@ -95,7 +96,8 @@ steps:
       - prophages_contigs_genes
 
   hmmscan:
-    run: ../Tools/HMMScan/hmmscan_swf.cwl
+    label: hmmscan
+    run: ./Tools/HMMScan/hmmscan_swf.cwl
     in:
       aa_fasta_files:
         source: 
@@ -109,7 +111,8 @@ steps:
       - output_table
 
   ratio_evalue:
-    run: ../Tools/RatioEvalue/ratio_evalue.cwl
+    label: ratio evalue ViPhOG
+    run: ./Tools/RatioEvalue/ratio_evalue.cwl
     in:
       input_table: hmmscan/output_table
       hmms_serialized: hmms_serialized_file
@@ -117,7 +120,8 @@ steps:
       - informative_table
 
   annotation:
-    run: ../Tools/Annotation/viral_annotation_swf.cwl
+    label: ViPhOG annotations
+    run: ./Tools/Annotation/viral_annotation_swf.cwl
     in:
       input_fastas:
         source:
@@ -130,7 +134,8 @@ steps:
       - annotation_tables
 
   assign:
-    run: ../Tools/Assign/assign_swf.cwl
+    label: Taxonomic assign
+    run: ./Tools/Assign/assign_swf.cwl
     in:
       input_tables: annotation/annotation_tables
       ncbi_tax_db: ncbi_tax_db_file
@@ -138,11 +143,13 @@ steps:
       - assign_tables
 
   krona:
-    run:  ../Tools/Krona/krona_swf.cwl
+    label: krona plots
+    run:  ./Tools/Krona/krona_swf.cwl
     in:
       assign_tables: assign/assign_tables
     out:
-      - krona_html
+      - krona_htmls
+      - krona_all_html
 
 outputs:
   filtered_contigs:
@@ -178,7 +185,10 @@ outputs:
       type: array
       items: File
   krona_plots:
-    outputSource: krona/krona_html
+    outputSource: krona/krona_htmls
     type:
       type: array
       items: File
+  krona_plot_all:
+    outputSource: krona/krona_all_html
+    type: File

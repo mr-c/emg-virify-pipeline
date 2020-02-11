@@ -6,22 +6,22 @@ label: "hmmscan table format"
 doc: |
   Format the hmmscan table results table.
 
-  Usage: hmmscan_postprocessing.sh input_table.tsv output_name
+  Usage: hmmscan_format_table.py -t input_table.tsv -o output_name
 
 requirements:
   InlineJavascriptRequirement: {}
 
-baseCommand: ["hmmscan_postprocessing.sh"]
+baseCommand: [hmmscan_format_table.py]
 
 inputs:
   input_table:
     type: File
     inputBinding:
-      position: 1
+      prefix: "-t"
   output_name:
-    type: File
+    type: string
     inputBinding:
-      position: 2
+      prefix: "-o"
 
 stdout: stdout.txt
 stderr: stderr.txt

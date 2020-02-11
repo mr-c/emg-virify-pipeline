@@ -23,8 +23,10 @@ inputs:
 arguments:
   - prefix: -p
     valueFrom: "meta"
+    position: 2
   - prefix: -a
     valueFrom: $(inputs.input_fasta.nameroot)_prodigal.faa
+    position: 3
 
 stdout: stdout.txt
 stderr: stderr.txt

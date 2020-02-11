@@ -1,5 +1,7 @@
 assign_tables:
   - class: File
-    path: high_conf_pvcp_tax_assign_1.tsv
+    path: test_tax_assign_1.tsv
   - class: File
-    path: high_conf_pvcp_tax_assign_2.tsv    
+    path: test_tax_assign_2.tsv    
+  - class: File
+    path: test_tax_assign_3.tsv    

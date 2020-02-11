@@ -76,51 +76,35 @@
       path: Any
       size: 2212936
 
-# Modification
-- job: tools/modification/modification_test_input.yml
-  tool: ../CWL/Tools/Modification/processing_hmm_result.cwl
-  short_name: processing_hmm_result.cwl
-  doc: Modification
-  output:
-    modified_file:
-      class: File
-      location: Any
-      path: Any
-      basename: hmmer_ViPhOG_modified.faa
-      checksum: sha1$32cd31b618e80ca7f991014e771ac7ff058e0baf
-      size: 3966
-
 # Parse
 - job: tools/parse/parse_test_input.yml
   tool: ../CWL/Tools/ParsingPredictions/parse_viral_pred.cwl
   short_name: parse_viral_pred.cwl
   doc: Parse viral predictions
   output: &parse
-    output_fastas:
-      high_confidence_contigs: None
-      prophages_contigs: None
-      low_confidence_contigs:
-          basename: low_confidence_putative_viral_contigs.fna
-          checksum: Any
-          class: File
-          location: Any
-          path: Any
-          size: 124813
-      stderr:
-          basename: stderr.txt
-          checksum: Any
-          class: File
-          location: Any
-          path: Any
-          size: 0
-      stdout:
-          basename: stdout.txt
-          checksum: Any
-          class: File
-          location: Any
-          path: Any
-          size: 102
-      
+    high_confidence_contigs: null
+    prophages_contigs: null
+    low_confidence_contigs:
+        basename: low_confidence_putative_viral_contigs.fna
+        checksum: Any
+        class: File
+        location: Any
+        path: Any
+        size: 124813
+    stderr:
+        basename: stderr.txt
+        checksum: Any
+        class: File
+        location: Any
+        path: Any
+        size: 0
+    stdout:
+        basename: stdout.txt
+        checksum: Any
+        class: File
+        location: Any
+        path: Any
+        size: 102
 
 # Prodigal
 - job: tools/prodigal/prodigal_test_input.yml
@@ -183,7 +167,7 @@
   short_name: virfinder.cwl
   doc: VirFinder
   output:
-    virfinder_output0:
+    virfinder_output:
       class: File
       basename: virfinder_output.tsv
       location: Any
@@ -296,28 +280,69 @@
   short_name: krona.cwl
   doc: Krona subworkflow
   output:
-    krona_html:
-      - class: File
-        basename: "high_conf_pvcp_tax_assign_1_tax_counts_krona.html"
-        location: Any
-        checksum: Any
-        size: 227076
-        format: "https://www.iana.org/assignments/media-types/text/html"
-        path: Any
-      - class: File
-        basename: "high_conf_pvcp_tax_assign_2_tax_counts_krona.html"
-        location: Any
-        checksum: Any
-        size: 227328
-        format: "https://www.iana.org/assignments/media-types/text/html"
-        path: Any
+    krona_all_html:
+      basename: krona_all_krona.html
+      checksum: Any
+      class: File
+      format: https://www.iana.org/assignments/media-types/text/html
+      location: Any
+      path: Any
+      size: 229001
+    krona_htmls:
+    - basename: test_tax_assign_1_tax_counts_krona.html
+      checksum: Any
+      class: File
+      format: https://www.iana.org/assignments/media-types/text/html
+      location: Any
+      path: Any
+      size: 226917
+    - basename: test_tax_assign_2_tax_counts_krona.html
+      checksum: Any
+      class: File
+      format: https://www.iana.org/assignments/media-types/text/html
+      location: Any
+      path: Any
+      size: 228280
+    - basename: test_tax_assign_3_tax_counts_krona.html
+      checksum: Any
+      class: File
+      format: https://www.iana.org/assignments/media-types/text/html
+      location: Any
+      path: Any
+      size: 227243
+    table_all:
+      basename: krona_all.tsv
+      checksum: Any
+      class: File
+      location: Any
+      path: Any
+      size: 912
+    tables:
+    - basename: test_tax_assign_1_tax_counts.tsv
+      checksum: Any
+      class: File
+      location: Any
+      path: Any
+      size: 152
+    - basename: test_tax_assign_2_tax_counts.tsv
+      checksum: Any
+      class: File
+      location: Any
+      path: Any
+      size: 546
+    - basename: test_tax_assign_3_tax_counts.tsv
+      checksum: Any
+      class: File
+      location: Any
+      path: Any
+      size: 214
 
 
 ## -- Workflows -- ##
 # TODO: Too slow, enable after VirSorter fasta chunking
 # Pipeline
 - job: workflows/pipeline_test_input.yml
-  tool: ../CWL/WorkFlow/pipeline.cwl
+  tool: ../CWL/pipeline.cwl
   short_name: pipeline.cwl
   doc: "Workflow"
   output:
@@ -326,44 +351,4 @@
       output_prodigal: *prodigal
       output_final_assign: *assign
       output_virsorter: *virsorter
-      output_krona_html:
-        class: File
-        basename: "krona.html"
-        location: Any
-        checksum: Any
-        size: 226967
-        format: "https://www.iana.org/assignments/media-types/text/html"
-        path: Any
-
-# Sub-workflow
-# - job: workflows/subworkflow_test_input.yml
-#   tool: ../CWL/WorkFlow/subworkflow_viral_processing.cwl
-#   short_name: subworkflow_viral_processing.cwl
-#   doc: "Subworkflow"
-#   output:
-#       prodigal_out: *prodigal
-#       hmmscan_out: *hmmscan
-#       modification_out:
-#         class: File
-#         basename: high_confidence_putative_viral_contigs_prodigal_hmmscan_modified.faa
-#         location: Any
-#         path: Any
-#         size: 105441
-#       annotation_table:
-#         class: File
-#         basename: high_confidence_putative_viral_contigs_prot_ann_table.tsv
-#         location: Any
-#         path: Any
-#         size: 37137
-#       assign_results:
-#         class: File
-#         basename: high_confidence_putative_viral_contigs_prot_ann_table_tax_assign.tsv
-#         location: Any
-#         path: Any
-#         size: 468
-#       ratio_evalue_table:
-#         class: File
-#         basename: high_confidence_putative_viral_contigs_prodigal_hmmscan_modified_informative.tsv
-#         location: Any
-#         path: Any
-#         size: 14375
+      # output_krona_html: *krona

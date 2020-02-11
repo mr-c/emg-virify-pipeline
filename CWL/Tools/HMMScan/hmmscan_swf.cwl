@@ -13,9 +13,7 @@ requirements:
 
 inputs:
   aa_fasta_files:
-    type:
-      type: array
-      items: File!
+    type: File[]
     doc: FASTA Protein files
   database:
     type: Directory
@@ -39,17 +37,17 @@ steps:
         valueFrom: "tmp_table.tsv"
     out:
       - result
-  post_processing:
-    run: hmmscan_postprocessing.cwl
+  format_table:
+    run: hmmscan_format_table.cwl
     label: Format the table
     in:
-      table: concatenate/result
-      name:
+      input_table: concatenate/result
+      output_name:
         valueFrom: "hmmer_table"
     out:
-      ouput_table
+      - output_table
 
 outputs:
   output_table:
     type: File
-    outputSource: post_processing/table
+    outputSource: format_table/output_table
