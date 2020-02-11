@@ -1,6 +1,6 @@
 # CWL viral pipeline
 
-[![Build Status](https://api.travis-ci.org/EBI-Metagenomics/emg-viral-pipeline.svg?branch=dev)](https://travis-ci.org/EBI-Metagenomics/emg-viral-pipeline)
+[![Build Status](https://travis-ci.org/EBI-Metagenomics/emg-virify-pipeline.svg?branch=dev)](https://travis-ci.org/EBI-Metagenomics/emg-viral-pipeline)
 
 CWL implementation of the MGnify viral pipeline.
 
@@ -53,6 +53,10 @@ https://view.commonwl.org/workflows/github.com/EBI-Metagenomics/emg-virify-pipel
 
 # Tests
 
-CWL tests are executed with (cwltest)[https://github.com/common-workflow-language/cwltest].
+CWL tests are executed with [cwltest](https://github.com/common-workflow-language/cwltest).
 
-Please refer to `run_tests.sh`.
+Run:
+```
+$ cd tests
+$ ./cwltest.sh --test tests.yml --tool cwltool
+```
