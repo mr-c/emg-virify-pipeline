@@ -25,7 +25,14 @@ arguments:
     valueFrom: "meta"
     position: 2
   - prefix: -a
-    valueFrom: $(inputs.input_fasta.nameroot)_prodigal.faa
+    valueFrom: |
+      ${
+        if (inputs.input_fasta.nameroot) {
+          return inputs.input_fasta.nameroot + "_prodigal.faa";
+        } else {
+          return "empty_prodigal.faa";
+        }
+      }
     position: 3
 
 stdout: stdout.txt
