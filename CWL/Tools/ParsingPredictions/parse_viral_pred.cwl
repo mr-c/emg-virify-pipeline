@@ -24,11 +24,7 @@ inputs:
       separate: true
       prefix: "-f"
   virsorter_dir:
-    type: Directory?
-    default:
-      class: Directory
-      path:  ../../WorkFlow/
-      listing: []
+    type: Directory
     inputBinding:
       separate: true
       prefix: "-s"

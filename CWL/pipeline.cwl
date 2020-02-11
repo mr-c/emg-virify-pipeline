@@ -14,32 +14,20 @@ inputs:
   # == Databases == #
   virsorter_data_dir:
     type: Directory
-    default:
-      class: Directory
-      path: ../../databases/virsorter-data
     doc: |
       VirSorter supporting database files.
   hmms_serialized_file:
     type: File
-    default:
-      class: File
-      path: ../../databases/vphmm_2020-01-29.pickle
     doc: |
       See Tools/RatioEvalue/ratio_evalue.cwl > hmms_serialized parameter
       Current version /databases/vphmm_2020-01-29.pickle.
   hmmscan_database_directory:
     type: Directory
-    default:
-      class: Directory
-      path: ../../databases/vpHMM
     doc: |
       HMMScan Viral HMM (databases/vpHMM/vpHMM_database).
       NOTE: it needs to be a full path.
   ncbi_tax_db_file:
     type: File
-    default:
-      class: File
-      path: ../../databases/ete3_ncbi_tax.sqlite
     doc: |
       ete3 NCBITaxa db https://github.com/etetoolkit/ete/blob/master/ete3/ncbi_taxonomy/ncbiquery.py
       http://etetoolkit.org/docs/latest/tutorial/tutorial_ncbitaxonomy.html
@@ -155,10 +143,10 @@ outputs:
   filtered_contigs:
     outputSource: length_filter/filtered_contigs_fasta
     type: File
-  virfinder:
+  virfinder_output:
     outputSource: virfinder/virfinder_output
     type: File
-  virsorter:
+  virsorter_output:
     outputSource: virsorter/predicted_viral_seq_dir
     type: Directory
   high_confidence_contigs:
