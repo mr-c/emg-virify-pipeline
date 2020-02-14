@@ -28,6 +28,7 @@ script:
   # TODO:
   # run only tests that do not require DBs or files from the FTP server
   - cwltest --test tests.yml --tool cwltool -j 12 --verbose -n 1,4,5,6,10
+  - cd emg-virify-scripts && python -m unittest discover tests
 
 cache:
   directories:

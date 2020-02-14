@@ -27,7 +27,7 @@ arguments:
   - prefix: -a
     valueFrom: |
       ${
-        if (inputs.input_fasta.nameroot) {
+        if (inputs.input_fasta && inputs.input_fasta.nameroot) {
           return inputs.input_fasta.nameroot + "_prodigal.faa";
         } else {
           return "empty_prodigal.faa";
