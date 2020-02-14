@@ -82,15 +82,21 @@
   short_name: parse_viral_pred.cwl
   doc: Parse viral predictions
   output: &parse
-    high_confidence_contigs: null
-    prophages_contigs: null
-    low_confidence_contigs:
-        basename: low_confidence_putative_viral_contigs.fna
-        checksum: Any
+    low_confidence_contigs: null
+    prophages_contigs:
+        basename: putative_prophages.fna
+        checksum: sha1$2b552ccbe254d3d4398baa8bf1f83cc5a6693762
         class: File
         location: Any
         path: Any
-        size: 124813
+        size: 177448
+    high_confidence_contigs:
+      basename: high_confidence_putative_viral_contigs.fna
+      checksum: sha1$4a28b43a786d328ab3c4db2a73575bf40322795f
+      class: File
+      location": Any
+      path: Any
+      size: 205400
     stderr:
         basename: stderr.txt
         checksum: Any
@@ -104,7 +110,7 @@
         class: File
         location: Any
         path: Any
-        size: 102
+        size: 93
 
 # Prodigal
 - job: tools/prodigal/prodigal_test_input.yml
