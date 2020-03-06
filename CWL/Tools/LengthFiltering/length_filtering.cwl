@@ -12,7 +12,6 @@ requirements:
   InlineJavascriptRequirement: {}
 
 baseCommand: ["filter_contigs_len.py"]
-arguments: ["-l", "0.5"]
 
 inputs:
   fasta_file:
@@ -20,6 +19,10 @@ inputs:
     inputBinding:
       separate: true
       prefix: "-f"
+  length:
+    type: float
+    inputBinding:
+      prefix: "-l"
   outdir:
     type: Directory?
     inputBinding:

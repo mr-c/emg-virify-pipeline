@@ -82,7 +82,13 @@
   short_name: parse_viral_pred.cwl
   doc: Parse viral predictions
   output: &parse
-    low_confidence_contigs: null
+    low_confidence_contigs:
+      basename: low_confidence_putative_viral_contigs.fna
+      checksum: sha1$4e8e498ba105fcf16d132d2226507baceaa52e77
+      class: File
+      location: Any
+      path: Any
+      size: 7313      
     prophages_contigs:
         basename: putative_prophages.fna
         checksum: sha1$2b552ccbe254d3d4398baa8bf1f83cc5a6693762
@@ -343,18 +349,38 @@
       path: Any
       size: 214
 
-
-## -- Workflows -- ##
-# TODO: Too slow, enable after VirSorter fasta chunking
-# Pipeline
-- job: workflows/pipeline_test_input.yml
-  tool: ../CWL/pipeline.cwl
-  short_name: pipeline.cwl
-  doc: "Workflow"
+# Fasta rename
+- job: tools/fasta_rename_restore/fasta_rename_test_input.yml
+  tool: ../CWL/Tools/FastaRename/fasta_rename.cwl
+  short_name: fasta_rename.cwl
+  doc: Fasta rename
   output:
-      output_length_filtering: *lf
-      output_parse: *parse
-      output_prodigal: *prodigal
-      output_final_assign: *assign
-      output_virsorter: *virsorter
-      # output_krona_html: *krona
+    renamed_fasta:
+      checksum: sha1$8f562c5b5152140f4a4891d74a13df4bb7313a51
+      basename: renamed.fasta 
+      location: Any
+      path: Any
+      class: File 
+      size: 2457631
+    name_map:
+      checksum: sha1$3a296c6f4bcf63e1407892febb40616e1c1cf813
+      basename: fasta_map.tsv 
+      location: Any
+      path: Any
+      class: File
+      size: 48071
+
+
+# Fasta restore
+- job: tools/fasta_rename_restore/fasta_restore_test_input.yml
+  tool: ../CWL/Tools/FastaRename/fasta_restore.cwl
+  short_name: fasta_restore.cwl
+  doc: Fasta name restore
+  output:
+    restored_fasta:
+      checksum: sha1$d79e79e5a60d45a6959fd90a995a1999dd9060fd 
+      basename: restored.fasta 
+      location: Any
+      path: Any
+      class: File
+      size: 2488144

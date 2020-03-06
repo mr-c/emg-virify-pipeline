@@ -34,11 +34,23 @@ inputs:
       This file was manually built and placed in the corresponding path (on databases)
 
 steps:
+  fasta_rename:
+    label: Filter contigs
+    run: ./Tools/FastaRename/fasta_rename.cwl
+    in:
+      input: input_fasta_file
+    out:
+      - renamed_fasta
+      - name_map
+
   length_filter:
     label: Filter contigs
     run: ./Tools/LengthFiltering/length_filtering.cwl
+    doc: Default lenght 1kb https://github.com/EBI-Metagenomics/emg-virify-scripts/issues/6
     in:
-      fasta_file: input_fasta_file
+      fasta_file: fasta_rename/renamed_fasta
+      length:
+        default: 1.0
     out:
       - filtered_contigs_fasta
 
@@ -139,6 +151,33 @@ steps:
       - krona_htmls
       - krona_all_html
 
+  fasta_restore_name_hc:
+    label: Restore fasta names
+    run: ./Tools/FastaRename/fasta_restore.cwl
+    in:
+      input: parse_pred_contigs/high_confidence_contigs
+      name_map: fasta_rename/name_map
+    out:
+      - restored_fasta
+
+  fasta_restore_name_lc:
+    label: Restore fasta names
+    run: ./Tools/FastaRename/fasta_restore.cwl
+    in:
+      input: parse_pred_contigs/low_confidence_contigs
+      name_map: fasta_rename/name_map
+    out:
+      - restored_fasta
+
+  fasta_restore_name_pp:
+    label: Restore fasta names
+    run: ./Tools/FastaRename/fasta_restore.cwl
+    in:
+      input: parse_pred_contigs/prophages_contigs
+      name_map: fasta_rename/name_map
+    out:
+      - restored_fasta
+
 outputs:
   filtered_contigs:
     outputSource: length_filter/filtered_contigs_fasta
@@ -150,13 +189,13 @@ outputs:
     outputSource: virsorter/predicted_viral_seq_dir
     type: Directory
   high_confidence_contigs:
-    outputSource: parse_pred_contigs/high_confidence_contigs
+    outputSource: fasta_restore_name_hc/restored_fasta
     type: File
   low_confidence_contigs:
-    outputSource: parse_pred_contigs/low_confidence_contigs
+    outputSource: fasta_restore_name_lc/restored_fasta
     type: File
   parse_prophages_contigs:
-    outputSource: parse_pred_contigs/prophages_contigs
+    outputSource: fasta_restore_name_pp/restored_fasta
     type: File
   high_confidence_faa:
     outputSource: prodigal/high_confidence_contigs_genes
