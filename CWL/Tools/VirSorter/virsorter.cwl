@@ -77,7 +77,8 @@ outputs:
      type: Directory
      outputBinding:
         glob: virsorter-out/Predicted_viral_sequences/
-
+        outputEval: |
+          ${ self[0].basename = "predicted_viral_sequences"; return self; }
 doc: |
   usage: wrapper_phage_contigs_sorter_iPlant.pl --fasta sequences.fa
 

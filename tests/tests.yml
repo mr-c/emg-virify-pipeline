@@ -70,11 +70,11 @@
   output:
     filtered_contigs_fasta: &lf
       class: File
-      basename: ERR575691_host_filtered_filt500bp.fasta
-      checksum: sha1$d15b69ff3be57c036f8c4585d21855b4bc686c56
+      basename: ERR575691_host_filtered_filt1000bp.fasta
+      checksum: sha1$a8b71fd241785c3e318752642192a629eab50d21
       location: Any
       path: Any
-      size: 2212936
+      size: 1987895
 
 # Parse
 - job: tools/parse/parse_test_input.yml
@@ -116,7 +116,7 @@
         class: File
         location: Any
         path: Any
-        size: 93
+        size: 233
 
 # Prodigal
 - job: tools/prodigal/prodigal_test_input.yml
@@ -194,10 +194,10 @@
   doc: VirSorter
   output:
       predicted_viral_seq_dir:
-        basename: Predicted_viral_sequences
+        basename: predicted_viral_sequences
         class: Directory
-        location: Predicted_viral_sequences
-        path: Predicted_viral_sequences
+        location: Any
+        path: Any
         listing: &virsorter
           - class: File
             basename: VIRSorter_cat-1.fasta
@@ -249,7 +249,7 @@
             size: 87306
           - class: File
             basename: VIRSorter_cat-3.gb
-            checksum: Any
+            checksum: sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709
             size: 0
             location: Any
             path: Any
@@ -257,11 +257,11 @@
             basename: VIRSorter_prophages_cat-4.gb
             location: Any
             path: Any
-            checksum: Any
+            checksum: sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709
             size: 0
           - class: File
             basename: VIRSorter_prophages_cat-5.gb
-            checksum: Any
+            checksum: sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709
             size: 0
             location: Any
             path: Any    
@@ -274,10 +274,10 @@
       stderr:
         class: File
         basename: stderr.txt
-        checksum: sha1$d189933ff267892f43370dcd046e36e2375071eb
+        checksum: Any
         location: Any
         path: Any
-        size: 158
+        size: Any
       stdout:
         class: File
         basename: stdout.txt
@@ -299,7 +299,7 @@
       format: https://www.iana.org/assignments/media-types/text/html
       location: Any
       path: Any
-      size: 229001
+      size: 228932
     krona_htmls:
     - basename: test_tax_assign_1_tax_counts_krona.html
       checksum: Any
@@ -307,14 +307,14 @@
       format: https://www.iana.org/assignments/media-types/text/html
       location: Any
       path: Any
-      size: 226917
+      size: 227001
     - basename: test_tax_assign_2_tax_counts_krona.html
       checksum: Any
       class: File
       format: https://www.iana.org/assignments/media-types/text/html
       location: Any
       path: Any
-      size: 228280
+      size: 228136
     - basename: test_tax_assign_3_tax_counts_krona.html
       checksum: Any
       class: File
@@ -328,20 +328,20 @@
       class: File
       location: Any
       path: Any
-      size: 912
+      size: 920
     tables:
     - basename: test_tax_assign_1_tax_counts.tsv
       checksum: Any
       class: File
       location: Any
       path: Any
-      size: 152
+      size: 165
     - basename: test_tax_assign_2_tax_counts.tsv
       checksum: Any
       class: File
       location: Any
       path: Any
-      size: 546
+      size: 541
     - basename: test_tax_assign_3_tax_counts.tsv
       checksum: Any
       class: File
