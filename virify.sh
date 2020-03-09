@@ -110,7 +110,6 @@ rm -rf "${JOB_FOLDER}"
 rm -rf "${OUT}"
 rm -rf "${LOG_DIR}"
 
-mkdir -p "$JOB_FOLDER"
 mkdir -p "$LOG_DIR"
 mkdir -p "$TMPDIR"
 mkdir -p "$OUT"
