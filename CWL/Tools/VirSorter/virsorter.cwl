@@ -1,13 +1,13 @@
-#!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: CommandLineTool
 
-
 label: "VirSorter"
 
+#hints:
+#  DockerRequirement:
+#    dockerPull: simroux/virsorter:v1.0.5
+
 requirements:
-  DockerRequirement:
-    dockerPull: simroux/virsorter:v1.0.5
   InlineJavascriptRequirement: {}
 
 baseCommand: [wrapper_phage_contigs_sorter_iPlant.pl]
@@ -20,15 +20,10 @@ inputs:
     inputBinding:
       separate: true
       prefix: "-f"
-  data:
-    type: Directory?
-    default:
-      class: Directory
-      path:  virsorter-data
-      listing: []
-      basename: virsorter-data
+  data_dir:
+    type: Directory
     inputBinding:
-      prefix: --data-dir
+      prefix: "--data-dir"
   dataset:
     type: string?
     inputBinding:
@@ -46,6 +41,7 @@ inputs:
       prefix: "--wdir"
   number_of_cpu:
     type: int?
+    default: 8
     inputBinding:
       separate: true
       prefix: "--ncpu"
@@ -81,14 +77,8 @@ outputs:
      type: Directory
      outputBinding:
         glob: virsorter-out/Predicted_viral_sequences/
-
-#  output_fasta:
-#    type:
-#      type: array
-#      items: File
-#    outputBinding:
-#      glob: virsorter-out/Predicted_viral_sequences/*[1,2,3,4,5].fasta  #  virsorter: virsorter-out/Predicted_viral_sequences/*[1,2,3,4,5].fasta
-
+        outputEval: |
+          ${ self[0].basename = "predicted_viral_sequences"; return self; }
 doc: |
   usage: wrapper_phage_contigs_sorter_iPlant.pl --fasta sequences.fa
 
@@ -116,7 +106,7 @@ doc: |
                      that you want to be included in several different analyses and want
                      to save the database and point VirSorter to it in subsequent runs.
                      By default, this is off, and you should only specify this flag if
-                     you're SURE you need it.
+                     you are SURE you need it.
       --no_c         Use this option if you have issues with empty output files, i.e. 0
                      viruses predicted by VirSorter. This make VirSorter use a perl function
                      instead of the C script to calculate enrichment statistics. Note that

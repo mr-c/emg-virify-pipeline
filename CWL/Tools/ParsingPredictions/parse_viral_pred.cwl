@@ -1,16 +1,16 @@
-#!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: CommandLineTool
 
+label: "Parse predictions"
 
-label: "Parsing viral predicted files"
+#hints:
+#  DockerRequirement:
+#    dockerPull: mhoelzer/cwl_parse_pred:0.1
 
 requirements:
-  DockerRequirement:
-    dockerPull: cwl_parse_pred:latest
   InlineJavascriptRequirement: {}
 
-baseCommand: ['python', '/parse_viral_pred.py']
+baseCommand: ['parse_viral_pred.py']
 
 inputs:
   assembly:
@@ -24,11 +24,7 @@ inputs:
       separate: true
       prefix: "-f"
   virsorter_dir:
-    type: Directory?
-    default:
-      class: Directory
-      path:  ../../WorkFlow/
-      listing: []
+    type: Directory
     inputBinding:
       separate: true
       prefix: "-s"
@@ -45,18 +41,23 @@ outputs:
   stdout: stdout
   stderr: stderr
 
-  output_fastas:
-    type:
-      type: array
-      items: File
+  high_confidence_contigs:
+    type: File?
     outputBinding:
-      glob: "*.fna"
-
+      glob: "high_confidence_putative_viral_contigs.fna"
+  low_confidence_contigs:
+    type: File?
+    outputBinding:
+      glob: "low_confidence_putative_viral_contigs.fna"
+  prophages_contigs:
+    type: File?
+    outputBinding:
+      glob: "putative_prophages.fna"
 
 doc: |
   usage: parse_viral_pred.py [-h] -a ASSEMB -f FINDER -s SORTER [-o OUTDIR]
 
-  description: script generates three output_files: High_confidence.fasta, Low_confidence.fasta, Prophages.fasta
+  description: script generates three output_files: high_confidence.fasta, low_confidence.fasta, Prophages.fasta
 
   optional arguments:
   -h, --help            show this help message and exit

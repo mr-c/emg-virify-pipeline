@@ -1,10 +1,9 @@
-FROM centos:centos7
+FROM continuumio/miniconda3
+ENV VERSION 2.6.3 
+LABEL maintainer="Martin Hoelzer <mhoelzer@ebi.ac.uk>"
 
-LABEL maintainer="Ekaterina Sakharova <kates@ebi.ac.uk>"
+RUN apt update && apt install -y procps && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN yum -y update; yum clean all
-RUN yum -y install gcc git make; yum clean all
-RUN git clone https://github.com/hyattpd/Prodigal.git && cd Prodigal && make install
-
+RUN conda install -c bioconda prodigal=$VERSION && conda clean -a
 
 CMD ["prodigal"]

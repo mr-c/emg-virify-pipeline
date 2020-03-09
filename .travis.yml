@@ -1,66 +1,42 @@
-os: linux
-
-services:
-  - docker
-
 language: python
-python: 3.6
+python: 3.7
+
+# Use sed to replace the SSH URL with the public URL, then initialize submodules
+before_install:
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive
 
 install:
-  - pip install -q cwl-runner cwltest cwltool
-  - sudo apt-get install aria2
-  - mkdir -p $TRAVIS_BUILD_DIR/virsorter-data-cache
-  # - time wget -nc -q -P $TRAVIS_BUILD_DIR/virsorter-data-cache/ ftp://ftp.ebi.ac.uk/pub/databases/metagenomics/VirSorter_data_viral/virsorter-data-v2.tar.gz
-  # https://zenodo.org/record/1168727/files/virsorter-data-v2.tar.gz
-#    (wget -qO- ftp://ftp.ebi.ac.uk/pub/databases/metagenomics/VirSorter_data_viral/virsorter-data-v2.tar.gz |
-#    tar --extract --verbose --gzip --file=/dev/stdin --directory=$TRAVIS_BUILD_DIR/CWL/Tools/VirSorter/)
+  # VirSorter DB (this is cached)
+  # - bash travis/download_databases.sh $TRAVIS_BUILD_DIR/databases
+  # CONDA and the env
+  - wget "https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh" -O miniconda.sh
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - source "$HOME/miniconda/etc/profile.d/conda.sh"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda info -a
+  # Pipeline env
+  - conda env create -f requirements/conda_env.yml
+  - conda activate viral_pipeline
+  # Env variables
+  - chmod +x $TRAVIS_BUILD_DIR/emg-virify-scripts/virify_scripts/*
+  - export PATH=$TRAVIS_BUILD_DIR/emg-virify-scripts/virify_scripts:$PATH
 
-
-#  - >
-#    (aria2c -x 16 -s 16 --dir=$TRAVIS_BUILD_DIR/virsorter-data-cache/ ftp://ftp.ebi.ac.uk/pub/databases/metagenomics/VirSorter_data_viral/virsorter-data-v2.tar.gz &&
-#    tar -xvzf $TRAVIS_BUILD_DIR/virsorter-data-cache/virsorter-data-v2.tar.gz) &
-#    docker pull simroux/virsorter:v1.0.5 &
-#    docker pull mgnify/hmmscan:latest &
-#    docker pull mgnify/virfinder_viral:latest &
-#    #docker build -t virfinder_viral:latest $TRAVIS_BUILD_DIR/CWL/Tools/VirFinder/ &
-#    docker build -q -t annotation_viral_contigs:latest $TRAVIS_BUILD_DIR/CWL/Tools/Annotation/ &
-#    docker build -q -t assign_taxonomy:latest $TRAVIS_BUILD_DIR/CWL/Tools/Assign/ &
-#    docker build -q -t cwl_length_filter_docker:latest $TRAVIS_BUILD_DIR/CWL/Tools/LengthFiltering/ &
-#    docker build -q -t mapping_viral_predictions:latest $TRAVIS_BUILD_DIR/CWL/Tools/Mapping/ &
-#    docker build -q -t cwl_parse_pred:latest $TRAVIS_BUILD_DIR/CWL/Tools/ParsingPredictions/ &
-#    docker build -q -t prodigal_viral:latest $TRAVIS_BUILD_DIR/CWL/Tools/Prodigal/ &
-#    docker build -q -t ratio_evalue:latest $TRAVIS_BUILD_DIR/CWL/Tools/RatioEvalue/ &
-#    docker build -q -t sed_docker:latest $TRAVIS_BUILD_DIR/CWL/Tools/Sed/
-#    ; wait
-#  - mv $TRAVIS_BUILD_DIR/virsorter-data $TRAVIS_BUILD_DIR/CWL/Tools/VirSorter/
-
-  - docker build -q -t cwl_length_filter_docker:latest $TRAVIS_BUILD_DIR/CWL/Tools/LengthFiltering/
 script:
-  - echo -e '#!/bin/bash\ncwltool --parallel "$@"' > pcwltool
-  - chmod a+x pcwltool
-  - export PATH=$PATH:$PWD && travis_wait 60 cwltest --test $TRAVIS_BUILD_DIR/CWL/Tests/length_filt_test.yml --timeout 7200 --tool pcwltool
-    # export PATH=$PATH:$PWD && travis_wait 60 cwltest --test $TRAVIS_BUILD_DIR/CWL/Tests/pipeline_test.yml --timeout 7200 --tool pcwltool
-
-
-# Caching from https://github.com/travis-ci/travis-ci/issues/5358#issuecomment-248915326
-before_cache:
-  # Save tagged docker images
-  - >
-    mkdir -p $HOME/docker && docker images -a --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
-    | xargs -n 2 -t sh -c 'test -e $HOME/docker/$1.tar.gz || docker save $0 | gzip -2 > $HOME/docker/$1.tar.gz'
-
-before_install:
-  # Load cached docker images
-  - if [[ -d $HOME/docker ]]; then ls $HOME/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
+  - cd $TRAVIS_BUILD_DIR/tests
+  # TODO:
+  # run only tests that do not require DBs or files from the FTP server
+  - cwltest --test tests.yml --tool cwltool -j 12 --verbose -n 1,4,5,6,10,11,12
+  - cd $TRAVIS_BUILD_DIR/emg-virify-scripts && python -m unittest discover tests
 
 cache:
-  bundler: true
   directories:
-    - $HOME/docker
-    - $TRAVIS_BUILD_DIR/virsorter-data-cache/
+    - databases/vpHMM_database
+    - databases/virsorter-data
+    # TODO: If the env changes then the cache has to be manually cleaned
+    # - $HOME/miniconda
 
-deploy:
-  provider: script
-  script: bash $TRAVIS_BUILD_DIR/docker_push.sh
-  on:
-    branch: master
+git:
+  # manually handling submodules
+  submodules: false

@@ -1,28 +1,29 @@
-FROM ubuntu:16.04
-MAINTAINER sminot@fredhutch.org
+FROM rocker/verse:latest
 
-# Install prerequisites
-RUN apt update -qq && \
-    apt-get -qq install -y r-base python3 python3-pip bats wget
+# install dependencies for virsorter
+RUN Rscript -e "install.packages('gapminder', repos = 'http://cran.us.r-project.org')" && \
+    Rscript -e "install.packages('glmnet', repos = 'http://cran.us.r-project.org')" && \ 
+    Rscript -e "install.packages('Rcpp', repos = 'http://cran.us.r-project.org')" && \ 
+install2.r --error BiocManager \
+    && Rscript -e 'requireNamespace("BiocManager"); BiocManager::install();' \
+    && Rscript -e 'requireNamespace("BiocManager"); BiocManager::install(c("qvalue"));' \
+    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
-# Python dependencies
-RUN pip3 install -q bucket-command-wrapper==0.3.0
+RUN apt-get update && apt-get install -y git && git clone https://github.com/jessieren/VirFinder.git
+RUN R CMD INSTALL /VirFinder/linux/VirFinder_1.1.tar.gz
 
-# R dependencies
-RUN echo "r <- getOption('repos'); r['CRAN'] <- 'http://cran.us.r-project.org'; options(repos = r);" > ~/.Rprofile && \
-    Rscript -e "install.packages('Rcpp'); source('https://bioconductor.org/biocLite.R'); biocLite('qvalue'); install.packages('glmnet')"
+
+RUN mkdir virfinder_exec/ && \
+            printf '#!/usr/bin/env Rscript\nlibrary(VirFinder) \n args <- commandArgs(trailingOnly = TRUE) \n filein <- args[1] \n \
+            \n predResult <- VF.pred(filein) \n predResult[order(predResult$pvalue),]' > /virfinder_exec/virfinderGO.R && \
+    chmod 777 /virfinder_exec/virfinderGO.R
+
+ENV PATH /virfinder_exec/:$PATH
+
+RUN apt-get clean all && apt remove -y git && \
+		apt-get purge && \
+		rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN mkdir /scratch
 
-RUN mkdir /usr/local/virfinder
-RUN wget https://github.com/FredHutch/docker-virfinder/raw/master/data/VirFinder_1.1.tar.gz
-RUN mv /VirFinder_1.1.tar.gz /usr/local/virfinder/ && tar -zxvf /usr/local/virfinder/VirFinder_1.1.tar.gz --directory /usr/local/virfinder/
-
-RUN R CMD INSTALL /usr/local/virfinder/VirFinder
-
 ADD /run_virfinder.Rscript /usr/local/bin/
-
-#RUN wget https://github.com/FredHutch/docker-virfinder/raw/master/data/LiverCirrhosis_2657Contigs.fasta
-#ADD LiverCirrhosis_2657Contigs.fasta /usr/local/virfinder/
-#ADD test.bats /usr/local/virfinder/
-#RUN bats /usr/local/virfinder/

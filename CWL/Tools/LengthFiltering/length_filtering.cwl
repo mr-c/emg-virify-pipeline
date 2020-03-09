@@ -4,13 +4,14 @@ class: CommandLineTool
 
 label: "Length Filter"
 
+#hints:
+#  DockerRequirement:
+#    dockerPull: mhoelzer/cwl_length_filter_docker:0.1
+
 requirements:
-  DockerRequirement:
-    dockerPull: cwl_length_filter_docker:latest
   InlineJavascriptRequirement: {}
 
-baseCommand: ['python', '/filter_contigs_len.py']
-arguments: ["-l", "0.5"]
+baseCommand: ["filter_contigs_len.py"]
 
 inputs:
   fasta_file:
@@ -18,6 +19,10 @@ inputs:
     inputBinding:
       separate: true
       prefix: "-f"
+  length:
+    type: float
+    inputBinding:
+      prefix: "-l"
   outdir:
     type: Directory?
     inputBinding:
