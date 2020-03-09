@@ -8,7 +8,13 @@ set -e
 # - conda env
 # - TMPDIR => to prevent using the user TMP FOLDEr
 # - Add scripts folder to PATH
-# - Add databases to PATH
+# - export databases variables:
+#   - VIRSORTER_DATA 
+#   - HMMS_SERIALIZED_FILE
+#   - HMMSCAN_DATABASE_DIRECTORY
+#   - NCBI_TAX_DB_FILE
+# - Add PERL5LIB point to conda site_perl path 
+# - exports $CWL with the full path to the pipeline.cwl
 
 source /path/to/init.sh
 
@@ -24,9 +30,9 @@ usage () {
     echo "-o Output folder"
     echo "-c Number of cores for the job"
     echo "-m Memory in megabytes"
-    echo "-y input YML"
+    echo "-i input YML"
     echo "Example:
-            $ virify.sh -n XX -m 1024 -c 12 -j job_folder_path -o /data/results/ -y input.yml
+            $ virify.sh -n XX -m 1024 -c 12 -j job_folder_path -o /data/results/ -i input.fasta
           NOTE:
           - The results folder will be /data/results/{job_name}.
           - The logs will be stored in /data/results/{job_name}/LOGS"
@@ -39,7 +45,7 @@ while getopts "n:j:o:c:m:" opt; do
         NAME_RUN="$OPTARG"
         if [ ! -n "$NAME_RUN" ];
         then
-            echo "ERROR (-n): $NAME_RUN cannot be empty." >&2
+            echo "ERROR -n cannot be empty." >&2
             usage;
             exit 1
         fi
@@ -70,10 +76,10 @@ while getopts "n:j:o:c:m:" opt; do
         fi
         ;;
     y)
-        YML="$OPTARG"
-        if [ ! -z "$YML" ];
+        INPUT_FASTA="$OPTARG"
+        if [ ! -z "$INPUT_FASTA" ];
         then
-            echo "ERROR (-y): $YML cannot be empty." >&2
+            echo "ERROR -i cannot be empty." >&2
             usage;
             exit 1
         fi        
@@ -123,4 +129,8 @@ toil-cwl-runner \
   --retryCount 0  \
   --logFile "$LOG_DIR/${NAME_RUN}.log" \
   "$CWL" \
-  "$YML"
+  --virsorter_data_dir "$VIRSORTER_DATA" \
+  --hmms_serialized_file "$HMMS_SERIALIZED_FILE" \
+  --hmmscan_database_directory "$HMMSCAN_DATABASE_DIRECTORY" \
+  --ncbi_tax_db_file "$NCBI_TAX_DB_FILE" \
+  --input_fasta_file "$INPUT_FASTA"
