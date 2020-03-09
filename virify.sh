@@ -18,12 +18,8 @@ set -e
 
 source /path/to/init.sh
 
-VERSION=$(git rev-parse HEAD)
-
 usage () {
     echo ""
-    echo "emg-virify-pipeline version: ${VERSION}"
-    echo "" 
     echo "Wrapper script to run the virify workflow."
     echo "-n job_name"
     echo "-j toil job worker path"
@@ -39,7 +35,7 @@ usage () {
     echo ""
 }
 
-while getopts "n:j:o:c:m:" opt; do
+while getopts "n:j:o:c:m:i:" opt; do
   case $opt in
     n)
         NAME_RUN="$OPTARG"
@@ -75,9 +71,9 @@ while getopts "n:j:o:c:m:" opt; do
             exit 1
         fi
         ;;
-    y)
+    i)
         INPUT_FASTA="$OPTARG"
-        if [ ! -z "$INPUT_FASTA" ];
+        if [ ! -n "$INPUT_FASTA" ];
         then
             echo "ERROR -i cannot be empty." >&2
             usage;
@@ -110,9 +106,14 @@ LOG_DIR="${OUT_DIR}/${NAME_RUN}/LOGS"
 OUT="${OUT_DIR}/${NAME_RUN}"
 
 # Prepare folders
-mkdir -p "$JOB_FOLDER" "$LOG_DIR" "$TMPDIR" "$OUT"
+rm -rf "${JOB_FOLDER}"
+rm -rf "${OUT}"
+rm -rf "${LOG_DIR}"
 
-rm -rf "${JOB_FOLDER:?}/"* "${OUT:?}"* "${LOG_DIR:?}/"*
+mkdir -p "$JOB_FOLDER"
+mkdir -p "$LOG_DIR"
+mkdir -p "$TMPDIR"
+mkdir -p "$OUT"
 
 toil-cwl-runner \
   --no-container \
