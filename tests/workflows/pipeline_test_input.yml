@@ -13,3 +13,6 @@ hmmscan_database_directory:
 ncbi_tax_db_file:
   class: File
   path: ../../databases/ete3_ncbi_tax.sqlite
+blast_database_dir:
+  class: Directory
+  path: ../../databases/IMG_VR_2018-07-01_4

@@ -32,7 +32,12 @@ inputs:
       ete3 NCBITaxa db https://github.com/etetoolkit/ete/blob/master/ete3/ncbi_taxonomy/ncbiquery.py
       http://etetoolkit.org/docs/latest/tutorial/tutorial_ncbitaxonomy.html
       This file was manually built and placed in the corresponding path (on databases)
-
+  blast_database_dir:
+    type: Directory
+    doc: |
+      Downloaded from:
+      https://genome.jgi.doe.gov/portal/IMG_VR/IMG_VR.home.html
+    
 steps:
   fasta_rename:
     label: Filter contigs
@@ -178,6 +183,22 @@ steps:
     out:
       - restored_fasta
 
+  imgvr_blast:
+    label: Blast in a database of viral sequences including metagenomes
+    run: ./Tools/IMGvrBlast/imgvr_blast_swf.cwl
+    in:
+      fasta_files:
+        source:
+          - parse_pred_contigs/high_confidence_contigs
+          - parse_pred_contigs/low_confidence_contigs
+          - parse_pred_contigs/prophages_contigs
+        linkMerge: merge_flattened
+      database: blast_database_dir
+    out:
+      - blast_results
+      - blast_result_filtereds
+      - merged_tsvs
+  
 outputs:
   filtered_contigs:
     outputSource: length_filter/filtered_contigs_fasta
@@ -219,3 +240,12 @@ outputs:
   krona_plot_all:
     outputSource: krona/krona_all_html
     type: File
+  blast_results:
+    outputSource: imgvr_blast/blast_results
+    type: File[]
+  blast_result_filtereds:
+    outputSource: imgvr_blast/blast_result_filtereds
+    type: File[]
+  blast_merged_tsvs:
+    outputSource: imgvr_blast/merged_tsvs
+    type: File[]
