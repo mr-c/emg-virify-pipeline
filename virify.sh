@@ -17,7 +17,7 @@ set -e
 # - Add PERL5LIB point to conda site_perl path 
 # - exports $CWL with the full path to the pipeline.cwl
 
-source /path/to/init.sh
+source /nfs/production/interpro/metagenomics/virify_pipeline/init.sh  # /path/to/init.sh
 
 usage () {
     echo ""
