@@ -384,3 +384,17 @@
       path: Any
       class: File
       size: 2488144
+
+# PPR-Meta
+- job: tools/pprmeta/pprmeta_test_input.yml
+  tool: ../CWL/Tools/PPRMeta/pprmeta.cwl
+  short_name: pprmeta.cwl
+  doc: PPR-Meta
+  output:
+    pprmeta_output:
+      checksum: sha1$d79e79e5a60d45a6959fd90a995a1999dd9060fd 
+      basename: restored.fasta 
+      location: Any
+      path: Any
+      class: File
+      size: 2488144
