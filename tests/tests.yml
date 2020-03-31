@@ -385,7 +385,7 @@
       class: File
       size: 2488144
       
-# blast
+# IMG/VR blast
 - job: tools/imgvr_blast/imgvr_blast_test_input.yml
   tool: ../CWL/Tools/IMGvrBlast/imgvr_blast.cwl
   short_name: imgvr_blast.cwl
@@ -406,7 +406,7 @@
       class: File
       size: 95
 
-# blast merge
+# IMG/VR blast merge
 - job: tools/imgvr_blast/imgvr_blast_merge_test_input.yml
   tool: ../CWL/Tools/IMGvrBlast/imgvr_merge.cwl
   short_name: imgvr_merge.cwl
@@ -419,3 +419,66 @@
       location: Any
       path: Any
       size: 206367
+
+# IMG/VR subworkflow
+- job: tools/imgvr_blast/imgvr_blast_subwf_test_input.yml
+  tool: ../CWL/Tools/IMGvrBlast/imgvr_blast_swf.cwl
+  short_name: imgvr_blast_swf.cwl
+  doc: Blast with IMG/VR subworflow
+  output:
+    blast_results: 
+      - checksum: sha1$f8ffbf47f3101595d7a1985b8758299956da6086
+        basename: high_confidence_putative_viral_contigs_imgvr_blast.tsv
+        location: Any
+        path: Any
+        class: File
+        size: 510291
+      - checksum: sha1$11c2decbbe1c464e3e3a531a2477e66f364fab80
+        basename: low_confidence_putative_viral_contigs_imgvr_blast.tsv
+        location: Any
+        path: Any
+        class: File
+        size: 94482
+      - checksum: sha1$3f5b5ed294030fe21efef714b19560be7a2640d3
+        basename: putative_prophages_imgvr_blast.tsv
+        location: Any
+        path: Any
+        class: File
+        size: 931615
+    blast_result_filtereds: 
+      - checksum: sha1$469a5ee86cd8fbf9c57061012a2a32b0675629a2
+        basename: high_confidence_putative_viral_contigs_imgvr_blast_filtered.tsv
+        location: Any
+        path: Any
+        class: File
+        size: 95
+      - checksum: sha1$a5d3a7a9895809c8e694d464b195b41f51870bbc
+        basename: low_confidence_putative_viral_contigs_imgvr_blast_filtered.tsv
+        location: Any
+        path: Any
+        class: File
+        size: 77697
+      - checksum: sha1$d47a0d2f9689f6da1c6ab4f3033bec7147b39953
+        basename: putative_prophages_imgvr_blast_filtered.tsv
+        location: Any
+        path: Any
+        class: File
+        size: 749
+    merged_tsvs: 
+      - checksum: sha1$cf7b735ec7cf3497fc278ce2fec696d23a0b71bf
+        basename: high_confidence_putative_viral_contigs_imgvr_blast_filtered_merged.tsv
+        location: Any
+        path: Any
+        class: File
+        size: 407
+      - checksum: sha1$b0e99dd04c842381e3e3795aca3694f0fb748321
+        basename: low_confidence_putative_viral_contigs_imgvr_blast_filtered_merged.tsv
+        location: Any
+        class: File
+        size: 206367
+      - checksum: sha1$f7b6f742ef273235eaf75e3f4b1189aaee4b75f4
+        basename: putative_prophages_imgvr_blast_filtered_merged.tsv
+        location: Any
+        path: Any
+        class: File
+        size: 1854
