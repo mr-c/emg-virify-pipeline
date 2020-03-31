@@ -384,3 +384,38 @@
       path: Any
       class: File
       size: 2488144
+      
+# blast
+- job: tools/imgvr_blast/imgvr_blast_test_input.yml
+  tool: ../CWL/Tools/IMGvrBlast/imgvr_blast.cwl
+  short_name: imgvr_blast.cwl
+  doc: Blast viral db
+  output:
+    blast_result:
+      checksum: 
+      basename: high_confidence_putative_viral_contigs_imgvr_blast.tsv
+      location: Any
+      path: Any
+      class: File
+      size: 
+    blast_result_filtered:
+      checksum: 
+      basename: high_confidence_putative_viral_contigs_imgvr_blast_filtered.tsv
+      location: Any
+      path: Any
+      class: File
+      size: 
+      
+# blast merge
+- job: tools/imgvr_blast/imgvr_blast_merge_test_input.yml
+  tool: ../CWL/Tools/IMGvrBlast/imgvr_merge.cwl
+  short_name: imgvr_merge.cwl
+  doc: merge blast with IMG/VR
+  output:
+    merged_tsv:
+      checksum: 
+      basename: 
+      location: Any
+      path: Any
+      class: File
+      size: 
