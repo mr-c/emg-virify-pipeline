@@ -2,6 +2,6 @@ blast_results_filtered:
   class: File
   path: low_confidence_putative_viral_contigs_imgvr_blast_filtered.tsv
 database:
-  path: ../../databases/IMG_VR_2018-07-01_4
+  path: ../../../databases/IMG_VR_2018-07-01_4
   class: Directory
-outfile: blast_merged_result
+outfile: blast_merged_result.tsv

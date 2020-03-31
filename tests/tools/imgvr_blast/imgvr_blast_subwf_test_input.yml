@@ -6,5 +6,5 @@ fasta_files:
   - path: putative_prophages.fna
     class: File
 database:
-  path: ../../databases/IMG_VR_2018-07-01_4 
+  path: ../../../databases/IMG_VR_2018-07-01_4 
   class: Directory

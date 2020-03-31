@@ -1,5 +1,4 @@
 qseqid	sseqid	pident	length	mismatch	gapopen	qstart	qend	qlen	sstart	send	evalue	bitscore	slen
-qseqid	sseqid	pident	length	mismatch	gapopen	qstart	qend	qlen	sstart	send	evalue	bitscore	slen
 NODE_82_length_2020_cov_811.839186_10_H	REF:638276021_____638275619	99.950	2020	1	0	1	2020	2020	34922	36941	0.0	3639	39937
 NODE_82_length_2020_cov_811.839186_10_H	REF:2588253568_____2588266234	99.901	2020	2	0	1	2020	2020	34923	36942	0.0	3635	39778
 NODE_82_length_2020_cov_811.839186_10_H	REF:642918831_____642918916	88.813	2038	202	9	1	2018	2020	33386	35417	0.0	2631	38841

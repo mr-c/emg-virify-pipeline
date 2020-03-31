@@ -3,6 +3,9 @@ class: CommandLineTool
 
 label: "merge blast with IMG/VR"
 
+requirements:
+  InlineJavascriptRequirement: {}
+
 doc: |
   Combine the filtered blast results with meta information from the IMG/VR database.
 

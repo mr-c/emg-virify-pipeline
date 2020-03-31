@@ -1,6 +1,0 @@
-qseqid	sseqid	pident	length	mismatch	gapopen	qstart	qend	qlen	sstart	send	evalue	bitscore	slen
-qseqid	sseqid	pident	length	mismatch	gapopen	qstart	qend	qlen	sstart	send	evalue	bitscore	slen
-NODE_5_length_65088_cov_10.862885_gene_1_gene_54-0-43522-cat_4	REF:642483472_____642483458	99.876	43522	10	3	1	43522	43522	4838	48315	0.0	78270	48491
-NODE_5_length_65088_cov_10.862885_gene_1_gene_54-0-43522-cat_4	REF:Gammaproteobacteria_gi_378982542-2724401-2772242	99.798	43497	37	1	1	43497	43522	4396	47841	0.0	78087	47841
-NODE_5_length_65088_cov_10.862885_gene_1_gene_54-0-43522-cat_4	REF:Gammaproteobacteria_gi_452722248-54203-101991	99.752	43498	14	3	1	43497	43522	4384	47788	0.0	78028	47788
-NODE_3_length_109381_cov_8.571337_gene_27_gene_74-28228-66525-cat_5	REF:642483445_____642483475	100.000	33318	0	0	4980	38297	38297	33693	376	0.0	60085	33693
