@@ -13,10 +13,11 @@ set -e
 #   - HMMS_SERIALIZED_FILE
 #   - HMMSCAN_DATABASE_DIRECTORY
 #   - NCBI_TAX_DB_FILE
+#   - BLAST_DB
 # - Add PERL5LIB point to conda site_perl path 
 # - exports $CWL with the full path to the pipeline.cwl
 
-source /path/to/init.sh
+source /nfs/production/interpro/metagenomics/virify_pipeline/init.sh  # /path/to/init.sh
 
 usage () {
     echo ""
@@ -133,4 +134,5 @@ toil-cwl-runner \
   --hmms_serialized_file "$HMMS_SERIALIZED_FILE" \
   --hmmscan_database_directory "$HMMSCAN_DATABASE_DIRECTORY" \
   --ncbi_tax_db_file "$NCBI_TAX_DB_FILE" \
-  --input_fasta_file "$INPUT_FASTA"
+  --input_fasta_file "$INPUT_FASTA"  \
+  --blast_database_dir "$BLAST_DB"

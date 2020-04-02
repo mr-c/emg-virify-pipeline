@@ -45,3 +45,14 @@ then
 else
   echo '# vphmm_2020-01-29.pickle present in cache'
 fi
+
+if [ ! -f "$1/IMG_VR_2018-07-01_4" ];
+then
+  wget \
+    ftp://ftp.ebi.ac.uk/pub/databases/metagenomics/viral-pipeline/IMG_VR_2018-07-01_4.tar.gz -O "$1/IMG_VR_2018-07-01_4" \
+    --retry-connrefused --progress=bar:force:noscroll
+    tar --extract --gzip --verbose --file=IMG_VR_2018-07-01_4.tar.gz --directory="$1" && \
+    rm IMG_VR_2018-07-01_4.tar.gz
+else
+  echo '# IMG_VR_2018-07-01_4.tar.gz present in cache'
+fi
