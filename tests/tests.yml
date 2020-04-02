@@ -392,9 +392,10 @@
   doc: PPR-Meta
   output:
     pprmeta_output:
-      checksum: sha1$d79e79e5a60d45a6959fd90a995a1999dd9060fd 
-      basename: restored.fasta 
+      basename: ERR575691_host_filtered_filt300bp_pprmeta.csv
+      checksum: sha1$70a30296146ed245398358cea8e50f1e8e0e3997
+      class: File
+      format: https://www.iana.org/assignments/media-types/text/csv
       location: Any
       path: Any
-      class: File
-      size: 2488144
+      size: 120306

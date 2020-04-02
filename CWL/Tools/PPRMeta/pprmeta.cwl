@@ -7,6 +7,11 @@ requirements:
   InlineJavascriptRequirement: {}
 
 inputs:
+  singularity_image:
+    type: File
+    label: pprmeta.simg
+    inputBinding:
+      prefix: "-i"
   fasta_file:
     type: File
     label: contigs

@@ -32,6 +32,11 @@ inputs:
       ete3 NCBITaxa db https://github.com/etetoolkit/ete/blob/master/ete3/ncbi_taxonomy/ncbiquery.py
       http://etetoolkit.org/docs/latest/tutorial/tutorial_ncbitaxonomy.html
       This file was manually built and placed in the corresponding path (on databases)
+  # == singularity containers == #
+  pprmeta_singularity_simg:
+    type: File
+    doc: |
+      PPR-Meta singularity simg file
 
 steps:
   fasta_rename:
@@ -71,6 +76,15 @@ steps:
     out:
       - predicted_viral_seq_dir
 
+  pprmeta:
+    label: PPR-Meta
+    run: ./Tools/PPRMeta/pprmeta.cwl
+    in:
+      singularity_image: pprmeta_singularity_simg
+      fasta_file: length_filter/filtered_contigs_fasta
+    out:
+      - pprmeta_output
+
   parse_pred_contigs:
     label: Combine
     run: ./Tools/ParsingPredictions/parse_viral_pred.cwl
@@ -78,6 +92,7 @@ steps:
       assembly: length_filter/filtered_contigs_fasta
       virfinder_tsv: virfinder/virfinder_output
       virsorter_dir: virsorter/predicted_viral_seq_dir
+      pprmeta_csv: pprmeta/pprmeta_output
     out:
       - high_confidence_contigs
       - low_confidence_contigs

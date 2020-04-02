@@ -1,9 +1,6 @@
-assembly:
+fasta_file:
   class: File
   path: ERR575691_host_filtered_filt300bp.fasta
-virfinder_tsv:
+singularity_image:
   class: File
-  path: virfinder_output.tsv
-virsorter_dir:
-  class: Directory
-  path: virsorter_results
+  path: ../../../emg-virify-scripts/containers/PPRMeta/pprmeta.simg 
