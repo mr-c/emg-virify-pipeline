@@ -1,0 +1,10 @@
+fasta_files:
+  - path: high_confidence_putative_viral_contigs.fna
+    class: File
+  - path: low_confidence_putative_viral_contigs.fna
+    class: File
+  - path: putative_prophages.fna
+    class: File
+database:
+  path: ../../../databases/IMG_VR_2018-07-01_4 
+  class: Directory
