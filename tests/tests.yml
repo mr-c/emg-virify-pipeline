@@ -384,6 +384,21 @@
       path: Any
       class: File
       size: 2488144
+
+# PPR-Meta
+- job: tools/pprmeta/pprmeta_test_input.yml
+  tool: ../CWL/Tools/PPRMeta/pprmeta.cwl
+  short_name: pprmeta.cwl
+  doc: PPR-Meta
+  output:
+    pprmeta_output:
+      basename: ERR575691_host_filtered_filt300bp_pprmeta.csv
+      checksum: sha1$70a30296146ed245398358cea8e50f1e8e0e3997
+      class: File
+      format: https://www.iana.org/assignments/media-types/text/csv
+      location: Any
+      path: Any
+      size: 120306
       
 # IMG/VR blast
 - job: tools/imgvr_blast/imgvr_blast_test_input.yml
@@ -482,3 +497,4 @@
         path: Any
         class: File
         size: 1854
+ 

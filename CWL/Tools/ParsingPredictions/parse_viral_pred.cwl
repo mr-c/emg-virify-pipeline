@@ -28,6 +28,11 @@ inputs:
     inputBinding:
       separate: true
       prefix: "-s"
+  pprmeta_csv:
+    type: File?
+    inputBinding:
+      separate: true
+      prefix: "-p"
   output_dir:
     type: string?
     inputBinding:
