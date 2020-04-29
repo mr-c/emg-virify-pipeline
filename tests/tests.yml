@@ -82,41 +82,41 @@
   short_name: parse_viral_pred.cwl
   doc: Parse viral predictions
   output: &parse
-    low_confidence_contigs:
-      basename: low_confidence_putative_viral_contigs.fna
-      checksum: sha1$4e8e498ba105fcf16d132d2226507baceaa52e77
+    high_confidence_contigs:
+      basename: high_confidence_putative_viral_contigs.fna
+      checksum: sha1$81d5c3961d31e9a2a2e01a996a5b178d1be5df34
       class: File
       location: Any
       path: Any
-      size: 7313      
-    prophages_contigs:
-        basename: putative_prophages.fna
-        checksum: sha1$2b552ccbe254d3d4398baa8bf1f83cc5a6693762
-        class: File
-        location: Any
-        path: Any
-        size: 177448
-    high_confidence_contigs:
-      basename: high_confidence_putative_viral_contigs.fna
-      checksum: sha1$4a28b43a786d328ab3c4db2a73575bf40322795f
+      size: 117206
+    low_confidence_contigs:
+      basename: low_confidence_putative_viral_contigs.fna
+      checksum: sha1$ca3af35d5448fe41e6d2b5d371f3e36c8536b44e
       class: File
-      location": Any
+      location: Any
       path: Any
-      size: 205400
+      size: 11427
+    prophages_contigs:
+      basename: putative_prophages.fna
+      checksum: sha1$12db65b245d0cad3538ebab1762b50ed3b313f17
+      class: File
+      location: Any
+      path: Any
+      size: 147030
     stderr:
-        basename: stderr.txt
-        checksum: Any
-        class: File
-        location: Any
-        path: Any
-        size: 0
+      basename: stderr.txt
+      checksum: sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709
+      class: File
+      location: Any
+      path: Any
+      size: 0
     stdout:
-        basename: stdout.txt
-        checksum: Any
-        class: File
-        location: Any
-        path: Any
-        size: 233
+      basename: stdout.txt
+      checksum: sha1$48d5fa70a9d78532f03623074809ec8c6befc928
+      class: File
+      location: Any
+      path: Any
+      size: 275
 
 # Prodigal
 - job: tools/prodigal/prodigal_test_input.yml
@@ -355,6 +355,13 @@
   short_name: fasta_rename.cwl
   doc: Fasta rename
   output:
+    name_map:
+      checksum: sha1$4d8875fd235f949cd21d12b531ea1db1dc7c0787
+      basename: fasta_map.tsv
+      location: Any
+      path: Any
+      class: File
+      size: 48071  
     renamed_fasta:
       checksum: sha1$8f562c5b5152140f4a4891d74a13df4bb7313a51
       basename: renamed.fasta 
@@ -362,13 +369,6 @@
       path: Any
       class: File 
       size: 2457631
-    name_map:
-      checksum: sha1$3a296c6f4bcf63e1407892febb40616e1c1cf813
-      basename: fasta_map.tsv 
-      location: Any
-      path: Any
-      class: File
-      size: 48071
 
 
 # Fasta restore
@@ -378,12 +378,12 @@
   doc: Fasta name restore
   output:
     restored_fasta:
-      checksum: sha1$d79e79e5a60d45a6959fd90a995a1999dd9060fd 
+      checksum: sha1$952b544cb61be6576e18c129fddab1d3f3d881e6 
       basename: restored.fasta 
       location: Any
       path: Any
       class: File
-      size: 2488144
+      size: 2489306
 
 # PPR-Meta
 - job: tools/pprmeta/pprmeta_test_input.yml
