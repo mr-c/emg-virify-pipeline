@@ -123,14 +123,6 @@ fi
 
 shift $((OPTIND - 1))
 
-if (($# == 0))
-then
-    echo ""
-    echo "ERROR: No positional arguments specified"
-    usage;
-    exit 1
-fi
-
 # mandatory params
 if [ -z "$NAME_RUN" ] || [ -z "$OUT_DIR" ] || [ -z "$CORES" ] || [ -z "$MEMORY" ] || [ -z "$INPUT_FASTA" ]
 then
