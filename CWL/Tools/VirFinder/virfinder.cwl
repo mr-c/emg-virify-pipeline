@@ -13,6 +13,7 @@ requirements:
   InlineJavascriptRequirement: {}
 
 baseCommand: "run_virfinder.Rscript"
+
 arguments:
   - valueFrom: virfinder_output.tsv
     position: 2

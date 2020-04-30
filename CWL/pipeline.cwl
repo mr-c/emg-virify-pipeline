@@ -11,6 +11,12 @@ requirements:
 inputs:
   input_fasta_file:  # input assembly
     type: File
+  virsorter_virome:
+    type: boolean
+    default: false
+    doc: |
+      Set this parameter if the input fasta is mostly viral.
+      See: https://github.com/simroux/VirSorter/issues/50
   # == Databases == #
   virsorter_data_dir:
     type: Directory
@@ -78,6 +84,7 @@ steps:
     in:
       fasta_file: length_filter/filtered_contigs_fasta
       data_dir: virsorter_data_dir
+      virome_decontamination_mode: virsorter_virome
     out:
       - predicted_viral_seq_dir
 

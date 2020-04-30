@@ -46,10 +46,13 @@ inputs:
       separate: true
       prefix: "--ncpu"
   virome_decontamination_mode:
-    type: null?
+    type: boolean
+    default: false
     inputBinding:
       separate: true
       prefix: "--virome"
+    doc: |
+      This is needed when providing VirSorter with an input file which is mostly (in your case entirely) viral. The reason is that VirSorter was initially designed for microbial single-cell genomes and metagenomes, i.e. in its default mode, VirSorter will first evaluate the different gene content features (i.e. % of viral genes, % of genes without PFAM affiliation, etc) on the whole dataset, and then look for contigs and or regions that are "more viral than average" (roughly). The "--virome" option bypasses this and forces the use of pre-computed features (based on microbial genomes from RefSeq).  
   diamond:
     type: null?
     inputBinding:
