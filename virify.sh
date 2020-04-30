@@ -169,4 +169,5 @@ toil-cwl-runner \
   --ncbi_tax_db_file "$NCBI_TAX_DB_FILE" \
   --input_fasta_file "$INPUT_FASTA"  \
   --img_blast_database_dir "$IMGVR_BLAST_DB" \
+  --pprmeta_singularity_simg "$PPRMETA_SIMG" \
   ${VIROME}
