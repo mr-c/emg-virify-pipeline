@@ -49,7 +49,7 @@ $ ./run_toil.sh
 
 https://view.commonwl.org/workflows/github.com/EBI-Metagenomics/emg-virify-pipeline/blob/dev/CWL/pipeline.cwl
 
-![pipeline diagram](https://view.commonwl.org/graph/svg/github.com/EBI-Metagenomics/emg-virify-pipeline/blob/934d97e7aef3691f98311b0c30e3422abbaa4bb9/CWL/pipeline.cwl)
+![pipeline diagram](https://view.commonwl.org/graph/png/github.com/EBI-Metagenomics/emg-virify-pipeline/blob/master/CWL/pipeline.cwl)
 
 # Tests
 
