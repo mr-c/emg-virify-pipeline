@@ -19,15 +19,17 @@ set -e
 
 source /nfs/production/interpro/metagenomics/virify_pipeline/init.sh  # /path/to/init.sh
 
+set -u
+
 usage () {
     echo ""
     echo "Wrapper script to run the virify workflow using toil-cwl-runner."
-    echo "-n job_name"
-    echo "-j toil job worker path"
-    echo "-o Output folder"
-    echo "-c Number of cores for the job"
-    echo "-m Memory in megabytes"
-    echo "-i intput fasta contigs"
+    echo "-n job_name [mandatory]"
+    echo "-j toil job worker path [mandatory]"
+    echo "-o Output folder [mandatory]"
+    echo "-c Number of cores for the job [mandatory]"
+    echo "-m Memory in megabytes [mandatory]"
+    echo "-i intput fasta contigs [mandatory]"
     echo "-v virome mode for virsorter"
     echo "Example:
             $ virify.sh -n XX -m 1024 -c 12 -j job_folder_path -o /data/results/ -i input.fasta
@@ -45,6 +47,7 @@ while getopts ":n:j:o:c:m:i:v" opt; do
         NAME_RUN="$OPTARG"
         if [ ! -n "$NAME_RUN" ];
         then
+            echo ""
             echo "ERROR -n cannot be empty." >&2
             usage;
             exit 1
@@ -55,12 +58,20 @@ while getopts ":n:j:o:c:m:i:v" opt; do
         ;;
     o)
         OUT_DIR="$OPTARG"
+        if [ ! -n "$OUT_DIR" ];
+        then
+            echo ""
+            echo "ERROR -o cannot be empty." >&2
+            usage;
+            exit 1
+        fi
         mkdir -p "$OUT_DIR"
         ;;
     c)
         CORES="$OPTARG"
         if ! [[ "$CORES" =~ ^[0-9]+$ ]]
         then
+            echo "" 
             echo "ERROR (-c): $CORES is not a number." >&2
             usage;
             exit 1
@@ -70,6 +81,7 @@ while getopts ":n:j:o:c:m:i:v" opt; do
         MEMORY="$OPTARG"
         if ! [[ "$MEMORY" =~ ^[0-9]+$ ]]
         then
+            echo ""
             echo "ERROR (-m): $MEMORY is not a number." >&2
             usage;
             exit 1
@@ -79,6 +91,7 @@ while getopts ":n:j:o:c:m:i:v" opt; do
         INPUT_FASTA="$OPTARG"
         if [ ! -n "$INPUT_FASTA" ];
         then
+            echo ""
             echo "ERROR -i cannot be empty." >&2
             usage;
             exit 1
@@ -92,14 +105,40 @@ while getopts ":n:j:o:c:m:i:v" opt; do
         exit 1
         ;;
     \?)
+        echo ""
         echo "Invalid option -$OPTARG" >&2
         usage;
+        exit 1;
     ;;
   esac
 done
 
-shift $((OPTIND -1))
+if ((OPTIND == 1))
+then
+    echo ""
+    echo "ERROR: No options specified"
+    usage;
+    exit 1
+fi
 
+shift $((OPTIND - 1))
+
+if (($# == 0))
+then
+    echo ""
+    echo "ERROR: No positional arguments specified"
+    usage;
+    exit 1
+fi
+
+# mandatory params
+if [ -z "$NAME_RUN" ] || [ -z "$OUT_DIR" ] || [ -z "$CORES" ] || [ -z "$MEMORY" ] || [ -z "$INPUT_FASTA" ]
+then
+    echo ""
+    echo "ERROR: Missing mandatory parameter."
+    usage;
+    exit 1
+fi
 
 # Prefix the path to make it easier to clean
 TMPDIR=${TMPDIR}/${NAME_RUN}
