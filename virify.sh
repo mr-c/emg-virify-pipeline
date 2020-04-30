@@ -139,6 +139,9 @@ JOB_FOLDER="${JOB_FOLDER}/${NAME_RUN}"
 LOG_DIR="${OUT_DIR}/${NAME_RUN}/LOGS"
 OUT="${OUT_DIR}/${NAME_RUN}"
 
+# print
+set -x
+
 # Prepare folders
 rm -rf "${JOB_FOLDER}"
 rm -rf "${OUT}"
@@ -156,7 +159,7 @@ toil-cwl-runner \
   --maxLogFileSize 0 \
   --cleanWorkDir=never \
   --defaultCores "$CORES" \
-  --defaultMemory "$MEMORY" \
+  --defaultMemory "$MEMORY"M \
   --jobStore "$JOB_FOLDER" \
   --outdir "$OUT" \
   --writeLogs "$LOG_DIR" \
