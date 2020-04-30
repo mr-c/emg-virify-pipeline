@@ -233,13 +233,13 @@ outputs:
     type: Directory
   high_confidence_contigs:
     outputSource: fasta_restore_name_hc/restored_fasta
-    type: File
+    type: File?
   low_confidence_contigs:
     outputSource: fasta_restore_name_lc/restored_fasta
-    type: File
+    type: File?
   parse_prophages_contigs:
     outputSource: fasta_restore_name_pp/restored_fasta
-    type: File
+    type: File?
   high_confidence_faa:
     outputSource: prodigal/high_confidence_contigs_genes
     type: File

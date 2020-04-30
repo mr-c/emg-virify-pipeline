@@ -1,0 +1,3 @@
+name_map:
+  class: File
+  path: fasta_map.tsv

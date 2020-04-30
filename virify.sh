@@ -161,6 +161,8 @@ toil-cwl-runner \
   --defaultCores "$CORES" \
   --defaultMemory "$MEMORY"M \
   --jobStore "$JOB_FOLDER" \
+  --stats \
+  --clusterStats "$LOG_DIR/stats.json" \
   --outdir "$OUT" \
   --writeLogs "$LOG_DIR" \
   --retryCount 0  \

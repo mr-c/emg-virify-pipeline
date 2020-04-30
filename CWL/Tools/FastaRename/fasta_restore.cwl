@@ -11,7 +11,7 @@ baseCommand: ["rename_fasta.py"]
 
 inputs:
   input:
-    type: File
+    type: File?
     inputBinding:
       prefix: "--input"
   name_map:
@@ -27,7 +27,7 @@ arguments:
 
 outputs:
   restored_fasta:
-    type: File
+    type: File?
     outputBinding:
       glob: "restored.fasta"
  

@@ -385,6 +385,14 @@
       class: File
       size: 2489306
 
+# Fasta restore (empty)
+- job: tools/fasta_rename_restore/fasta_restore_test_input_empty.yml
+  tool: ../CWL/Tools/FastaRename/fasta_restore.cwl
+  short_name: fasta_restore.cwl
+  doc: Fasta name restore (empty)
+  output:
+    restored_fasta: null 
+
 # PPR-Meta
 - job: tools/pprmeta/pprmeta_test_input.yml
   tool: ../CWL/Tools/PPRMeta/pprmeta.cwl
