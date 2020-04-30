@@ -16,7 +16,7 @@ inputs:
   database:
     type: Directory
   aa_fasta_file:
-    type: File
+    type: File?
     inputBinding:
       position: 5
       separate: true

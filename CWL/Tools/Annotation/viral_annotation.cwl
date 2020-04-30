@@ -15,7 +15,7 @@ arguments: ["-o", $(runtime.outdir)]
 
 inputs:
   input_fasta:
-    type: File
+    type: File?
     inputBinding:
       separate: true
       prefix: "-p"
