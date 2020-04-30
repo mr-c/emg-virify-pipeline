@@ -4,4 +4,4 @@ assign_tables:
   - class: File
     path: test_tax_assign_2.tsv    
   - class: File
-    path: test_tax_assign_3.tsv    
+    path: test_tax_assign_3.tsv

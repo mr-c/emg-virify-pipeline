@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# scipts
+# scripts path
 PATH="$(dirname $(pwd))/emg-virify-scripts/virify_scripts":$PATH
 
 cwltest "$@"
