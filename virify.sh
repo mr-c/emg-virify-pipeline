@@ -13,7 +13,7 @@ set -e
 #   - HMMS_SERIALIZED_FILE
 #   - HMMSCAN_DATABASE_DIRECTORY
 #   - NCBI_TAX_DB_FILE
-#   - BLAST_DB
+#   - IMGVR_BLAST_DB
 # - Add PERL5LIB point to conda site_perl path 
 # - exports $CWL with the full path to the pipeline.cwl
 
@@ -21,13 +21,14 @@ source /nfs/production/interpro/metagenomics/virify_pipeline/init.sh  # /path/to
 
 usage () {
     echo ""
-    echo "Wrapper script to run the virify workflow."
+    echo "Wrapper script to run the virify workflow using toil-cwl-runner."
     echo "-n job_name"
     echo "-j toil job worker path"
     echo "-o Output folder"
     echo "-c Number of cores for the job"
     echo "-m Memory in megabytes"
-    echo "-i input YML"
+    echo "-i intput fasta contigs"
+    echo "-v virome mode for virsorter"
     echo "Example:
             $ virify.sh -n XX -m 1024 -c 12 -j job_folder_path -o /data/results/ -i input.fasta
           NOTE:
@@ -36,7 +37,9 @@ usage () {
     echo ""
 }
 
-while getopts "n:j:o:c:m:i:" opt; do
+VIROME=""
+
+while getopts ":n:j:o:c:m:i:v" opt; do
   case $opt in
     n)
         NAME_RUN="$OPTARG"
@@ -81,6 +84,9 @@ while getopts "n:j:o:c:m:i:" opt; do
             exit 1
         fi        
         ;;
+    v)
+        VIROME="--virome"
+        ;;        
     :)
         usage;
         exit 1
@@ -92,11 +98,7 @@ while getopts "n:j:o:c:m:i:" opt; do
   esac
 done
 
-if ((OPTIND == 1));
-then
-    usage;
-    exit 1
-fi
+shift $((OPTIND -1))
 
 
 # Prefix the path to make it easier to clean
@@ -135,4 +137,5 @@ toil-cwl-runner \
   --hmmscan_database_directory "$HMMSCAN_DATABASE_DIRECTORY" \
   --ncbi_tax_db_file "$NCBI_TAX_DB_FILE" \
   --input_fasta_file "$INPUT_FASTA"  \
-  --blast_database_dir "$BLAST_DB"
+  --img_blast_database_dir "$IMGVR_BLAST_DB" \
+  ${VIROME}

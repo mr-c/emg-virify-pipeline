@@ -38,7 +38,7 @@ inputs:
       ete3 NCBITaxa db https://github.com/etetoolkit/ete/blob/master/ete3/ncbi_taxonomy/ncbiquery.py
       http://etetoolkit.org/docs/latest/tutorial/tutorial_ncbitaxonomy.html
       This file was manually built and placed in the corresponding path (on databases)
-  blast_database_dir:
+  img_blast_database_dir:
     type: Directory
     doc: |
       Downloaded from:
@@ -215,7 +215,7 @@ steps:
           - parse_pred_contigs/low_confidence_contigs
           - parse_pred_contigs/prophages_contigs
         linkMerge: merge_flattened
-      database: blast_database_dir
+      database: img_blast_database_dir
     out:
       - blast_results
       - blast_result_filtereds
