@@ -9,7 +9,9 @@ requirements:
 
 inputs:
   input_fastas:
-    type: File[]
+    type:
+      type: array
+      items: ["File", "null"]
     doc: |
       "FASTA Protein files"
   hmmer_table:

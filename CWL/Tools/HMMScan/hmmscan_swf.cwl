@@ -13,7 +13,9 @@ requirements:
 
 inputs:
   aa_fasta_files:
-    type: File[]
+    type:
+      type: array
+      items: ["null", "File"]
     doc: FASTA Protein files
   database:
     type: Directory

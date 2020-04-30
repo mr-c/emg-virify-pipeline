@@ -13,7 +13,9 @@ requirements:
 
 inputs:
   fasta_files:
-    type: File[]
+    type:
+      type: array
+      items: ["null", "File"]
     doc: FASTA files
   database:
     type: Directory

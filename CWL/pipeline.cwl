@@ -242,13 +242,13 @@ outputs:
     type: File?
   high_confidence_faa:
     outputSource: prodigal/high_confidence_contigs_genes
-    type: File
+    type: File?
   low_confidence_faa:
     outputSource: prodigal/low_confidence_contigs_genes
-    type: File
+    type: File?
   prophages_faa:
     outputSource: prodigal/prophages_contigs_genes
-    type: File
+    type: File?
   taxonomy_assignations:
     outputSource: assign/assign_tables
     type:

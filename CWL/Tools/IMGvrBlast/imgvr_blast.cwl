@@ -14,7 +14,7 @@ inputs:
     inputBinding:
       prefix: "-d"
   query:
-    type: File
+    type: File?
     inputBinding:
       prefix: "-q"
 
@@ -33,11 +33,11 @@ outputs:
   blast_result:
     type: File
     outputBinding:
-      glob: $(inputs.query.nameroot + "_imgvr_blast.tsv")
+      glob: $("*_imgvr_blast.tsv")
   blast_result_filtered:
     type: File
     outputBinding:
-      glob: $(inputs.query.nameroot + "_imgvr_blast_filtered.tsv")
+      glob: $("*_imgvr_blast_filtered.tsv")
 
 $namespaces:
  s: http://schema.org/
