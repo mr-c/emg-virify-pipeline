@@ -1,7 +1,7 @@
 cwlVersion: v1.0
 class: Workflow
 
-label: "ViPhOG annotations"
+label: ViPhOG annotations
 
 requirements:
   InlineJavascriptRequirement: {}
@@ -13,17 +13,17 @@ inputs:
       type: array
       items: ["File", "null"]
     doc: |
-      "FASTA Protein files"
+      FASTA Protein files
   hmmer_table:
     type: File
     doc: |
-      "HMMER concatenated tsv"
+      HMMER concatenated tsv
 
 steps:
   viral_annotation:
     run: viral_annotation.cwl
     scatter: input_fasta
-    label: "Run viral_contigs_annotation.py"
+    label: contigs annotation
     in:
       input_fasta: input_fastas
       input_table: hmmer_table

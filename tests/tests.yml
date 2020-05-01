@@ -506,3 +506,30 @@
         class: File
         size: 1854
  
+# IMG/VR blast (empty)
+- job: tools/imgvr_blast/imgvr_blast_subwf_test_input_empty.yml
+  tool: ../CWL/Tools/IMGvrBlast/imgvr_blast_swf.cwl
+  short_name: imgvr_blast_swf.cwl
+  doc: Blast with IMG/VR subworflow (empty)
+  output:
+    blast_result_filtereds:
+      - basename: empty_imgvr_blast_filtered.tsv 
+        checksum: sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709
+        location: Any
+        path: Any
+        class: File 
+        size: 0    
+    blast_results:
+      - basename: empty_imgvr_blast.tsv
+        checksum: sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709
+        class: File
+        location: Any
+        path: Any
+        size: 0
+    merged_tsvs:
+      - checksum: sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709
+        basename: empty_imgvr_blast_filtered_merged.tsv
+        location: Any
+        path: Any
+        class: File
+        size: 0

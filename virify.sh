@@ -98,7 +98,7 @@ while getopts ":n:j:o:c:m:i:v" opt; do
         fi        
         ;;
     v)
-        VIROME="--virome"
+        VIROME="--virsorter_virome"
         ;;        
     :)
         usage;
