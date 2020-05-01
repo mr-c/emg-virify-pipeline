@@ -20,7 +20,14 @@ inputs:
 
 arguments: 
   - prefix: "-o"
-    valueFrom: $(inputs.query.nameroot + "_imgvr_blast")
+    valueFrom: |
+      ${
+        if (inputs.query && inputs.query.nameroot) {
+          return inputs.query.nameroot + "_imgvr_blast";
+        } else {
+          return "empty_imgvr_blast";
+        }
+      }
   - prefix: "-c"
     valueFrom: $(parseInt(runtime.cores))
 
