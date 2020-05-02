@@ -4,8 +4,6 @@ class: CommandLineTool
 label: "blast against IMG/VR"
 
 requirements:
-  ResourceRequirement:
-    coresMin: 4
   InlineJavascriptRequirement: {}
 
 inputs:

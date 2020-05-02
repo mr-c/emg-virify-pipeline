@@ -10,9 +10,6 @@ label: "Krona"
 
 requirements:
   InlineJavascriptRequirement: {}
-  ResourceRequirement:
-    ramMin: 200
-    coresMin: 2
 
 inputs:
   otu_counts:
